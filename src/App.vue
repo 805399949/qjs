@@ -1,29 +1,47 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <Public></Public>
+    <div class="wrap">
+      <router-view></router-view>
     </div>
-    <router-view/>
+    
   </div>
 </template>
 
-<style lang="less">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+<script>
+import Public from "./views/Public";
+
+export default {
+  name: "app",
+  components: {
+    Public
   }
+};
+</script>
+
+<style>
+ul li {
+  list-style-type: none;
+}
+.wrap {
+  margin: 0 auto;
+  width: 1000px;
+  position: relative;
+}
+.clearfix:before,
+.clearfix:after {
+  display: block;
+  content: "\200b";
+  height: 0;
+}
+.clearfix:after {
+  clear: both;
+}
+.clearfix {
+  *zoom: 1;
+}
+img {
+  border: 0;
+  border: none;
 }
 </style>
