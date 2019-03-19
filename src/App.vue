@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <Public></Public>
-    <div class="wrap">
+    <!-- <Public></Public> -->
+    <!-- <div class="wrap"> -->
       <router-view></router-view>
-    </div>
+    <!-- </div> -->
     
   </div>
 </template>
@@ -19,7 +19,19 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less">
+.size{
+  width: 100%;
+  height: 100%;
+}
+html,body{
+  .size;
+  margin: 0;
+  padding: 0;
+}
+#app {
+  .size;
+}
 ul li {
   list-style-type: none;
 }
