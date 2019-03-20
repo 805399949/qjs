@@ -1,21 +1,24 @@
 <template>
-    <div>
-        <Public></Public>
-        <Forum></Forum>
+    <div class="home-wrap">
+        <v-header></v-header>
     </div>
 </template>
 
 <script>
 
-import Public from '@/views/Public'
-import Forum from '@/views/Forum'
+import Header from '@/views/Public/header'
 
 export default {
     name: 'Home',
     components: {
-        Public,
-        Forum
+        vHeader: Header,
     }
 }
 </script>
 
+<style lang="less" scoped>
+    .home-wrap {
+        width: 1160px;
+        margin: 0 auto;
+    }
+</style>

@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!-- <Public></Public> -->
     <!-- <div class="wrap"> -->
       <router-view></router-view>
     <!-- </div> -->
@@ -9,13 +8,9 @@
 </template>
 
 <script>
-import Public from "./views/Public";
 
 export default {
   name: "app",
-  components: {
-    Public
-  }
 };
 </script>
 

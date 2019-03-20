@@ -1,6 +1,5 @@
 <template>
-  <div class="hello">
-    <div class="icondiv"></div>
+  <div class="nav-wrap">
     <Menu
       :active-name="selected"
       @on-select="menuselect"
@@ -9,7 +8,7 @@
       mode="horizontal"
       :open-names="openname"
     >
-      <template v-for="(item, index) in listdata">
+      <template v-for="item in listdata">
         <template v-if="item.child&&item.child.length>0">
           <Submenu :name="item.name">
             <template slot="title">
@@ -63,7 +62,7 @@ export default {
         {
           name: "论坛",
           icon: ["ixitong", "cipp"],
-          href: "forum"
+          href: "forum_index"
         },
         {
           name: "公告",
@@ -116,3 +115,9 @@ export default {
   }
 };
 </script>
+
+<style lang="less" scoped>
+.nav-wrap {
+
+}
+</style>
