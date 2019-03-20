@@ -1,6 +1,6 @@
 <template>
   <div class="search-wrap">
-    <v-header></v-header>
+    <v-header :selected="'search_index'"></v-header>
     <h1>搜索页</h1>
   </div>
 </template>

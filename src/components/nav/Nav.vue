@@ -9,7 +9,7 @@
       :open-names="openname"
     >
       <template v-for="item in listdata">
-        <template v-if="item.child&&item.child.length>0">
+        <template v-if="item.child && item.child.length > 0">
           <Submenu :name="item.name">
             <template slot="title">
               <Icon :class="item.icon"></Icon>
@@ -33,13 +33,34 @@
 <script>
 export default {
   name: "menulist",
+  props: {
+    selected: {
+      type: String,
+      default: "home",
+    },
+  },
   data() {
     return {
       listdata: [
         {
-          name: "首页",
+          name: "钱交所",
           icon: ["ixitong", "cipp"],
           href: "home"
+        },
+        {
+          name: "资讯",
+          icon: ["ixitong", "cipp"],
+          href: "report"
+        },
+        {
+          name: "论坛",
+          icon: ["ixitong", "cipp"],
+          href: "forum_index"
+        },
+        {
+          name: "搜索",
+          icon: ["ixitong", "cipp"],
+          href: "search_index"
         },
         {
           name: "工具",
@@ -60,36 +81,21 @@ export default {
           ]
         },
         {
-          name: "论坛",
-          icon: ["ixitong", "cipp"],
-          href: "forum_index"
-        },
-        {
-          name: "公告",
+          name: "APP",
           icon: ["im-extension", "cipp"],
-          child: [
-            {
-              name: "央行公告",
-              href: "http://www.baidu.com"
-            },
-            {
-              name: "站内公告",
-              href: "qjsNotice"
-            }
-          ]
+          href: "app"
         }
       ],
-      selected: "home",
       openname: []
     };
   },
   methods: {
     menuselect(a) {
-      console.log(a)
+      console.log(a,'a')
       this.$router.push({ name: a });
     },
     watchRoute() {
-      console.log(this.$route.name)
+      console.log(this.$route.name, 'wr')
       if (
         this.$refs.child &&
         this.$route.name != "submenu1" &&

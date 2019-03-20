@@ -6,7 +6,7 @@
       </a>
     </div>
     <div class="nav">
-      <Nav></Nav>
+      <Nav :selected="selected"></Nav>
     </div>
     <div class="quick-menu">
       <div class="top-bar-box">
@@ -25,11 +25,18 @@ export default {
   components: {
     Nav,
   },
+  props: {
+    selected: {
+      type: String,
+      default: "home",
+    }
+  },
 }
 </script>
 
 <style scoped lang="less">
   .header-wrap {
+    width: 1160px;
     height: 60px;
     line-height: 60px;
     margin: 0 auto;
