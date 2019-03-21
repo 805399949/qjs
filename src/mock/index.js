@@ -1,6 +1,7 @@
 import Mock from 'mockjs'
-import { getUserInfo } from './response/user'
+import { getUserInfo, login } from './response/user'
 
-Mock.mock(/\/getUserInfo/, getUserInfo)
+// Mock.mock(/\/get_info/, 'get', getUserInfo)
+// Mock.mock(/\/login/, login)
 
 export default Mock

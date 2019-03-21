@@ -1,10 +1,30 @@
 import axios from './index'
-export const getUserInfo = ({ userId }) => {
+
+
+export const getUserInfo = (token) => {
   return axios.request({
-    url: '/getUserInfo',
-    method: 'post',
-    data: {
-      userId
-    }
+    url: 'get_info',
+    params: {
+      token
+    },
+    method: 'get'
+  })
+}
+
+export const logout = (token) => {
+  return axios.request({
+    url: 'logout',
+    method: 'post'
+  })
+}
+
+export const login = ({ userName, password }) => {
+  return axios.request({
+    url: '/login',
+    params: {
+      userName,
+      password
+    },
+    method: 'post'
   })
 }
