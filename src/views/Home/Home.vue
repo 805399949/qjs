@@ -17,17 +17,20 @@
                 </CarouselItem>
             </Carousel>
         </div>
+        <v-footer></v-footer>
     </div>
 </template>
 
 <script>
 
-import Header from '@/views/Public/header'
+import Header from '@/views/Public/header';
+import Footer from '@/views/Public/footer';
 
 export default {
     name: 'Home',
     components: {
         vHeader: Header,
+        vFooter: Footer,
     },
     data() {
         return {
