@@ -12,21 +12,39 @@ export default [
   },
   {
     path: '/',
-    name: 'home',
-    component: Home
+    name: '_home',
+    redirect: '/home',
+    component: Home,
+    children: [
+      {
+        path: '/home',
+        name: 'home',
+        component: () => import('@/views/Qjs/Qjs')
+      }
+    ]
   },
   {
-    path: '/home',
-    name: 'home',
-    component: Home
+    path: '/forum',
+    name: 'forum',
+    component: Home,
+    children: [
+      {
+        path: 'forum_page',
+        name: 'forum_page',
+        component: () => import('@/views/Forum')
+      }
+    ]
+  },
+  {
+    path: '/search',
+    name: 'search',
+    component: Home,
+    children: [
+      {
+        path: 'search_page',
+        name: 'search_page',
+        component: () => import('@/views/Search/searchIndex.vue')
+      }
+    ]
   }
-  // {
-  //   path: '/forum',
-  //   name: 'forum',
-  //   component: Forum
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   // component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue')
-  // }
 ]
