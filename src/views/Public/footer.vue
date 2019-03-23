@@ -11,7 +11,12 @@
       </section>
       <section class="partner-section">
         <h3>合作招商</h3>
-        <div class="about-content">合作招商内容</div>
+        <div class="partner-content">
+          <p>广告合作: </p>
+          <p>电话：13100001111</p>
+          <p>邮箱：13100001111</p>
+          <p>wechat：13100001111</p>
+        </div>
       </section>
       <section class="tag-section">
         <h3>合作招商</h3>
@@ -30,9 +35,6 @@ export default {
 <style scoped lang="less">
 .footer-wrap {
   background: #2d3237;
-  position: fixed;
-  bottom: 0;
-  left: 0;
   height: auto;
   width: 100%;
   .sections {
@@ -49,6 +51,14 @@ export default {
         font-weight: 600;
         margin-bottom: 20px;
         margin-top: 10px;
+      }
+      .partner-content {
+        p {
+          opacity: 0.75;
+          font-size: 16px;
+          color: #FFFFFF;
+          margin-bottom: 10px;
+        }
       }
     }
   }
