@@ -55,12 +55,12 @@ export default {
         {
           name: "论坛",
           icon: ["ixitong", "cipp"],
-          href: "forum_index"
+          href: "forum_page"
         },
         {
           name: "搜索",
           icon: ["ixitong", "cipp"],
-          href: "search_index"
+          href: "search_page"
         },
         {
           name: "工具",

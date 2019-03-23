@@ -30,7 +30,7 @@ export default {
 <style scoped lang="less">
 .footer-wrap {
   background: #2d3237;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   height: auto;
