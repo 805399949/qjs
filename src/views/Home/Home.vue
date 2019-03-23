@@ -17,6 +17,16 @@
                 </CarouselItem>
             </Carousel>
         </div>
+        <div class="news-wrap">
+            <div class="tit-wrap">
+                <p class="tit">资讯</p>
+                <span class="tit-line"></span>
+                <p class="tit dec">我们将为您提供最新，最有价值的信息</p> 
+            </div>
+            <div class="news-content">
+                <h1>资讯内容</h1>
+            </div>
+        </div>
         <v-footer></v-footer>
     </div>
 </template>
@@ -50,6 +60,28 @@ export default {
                 color: #fff;
                 font-size: 20px;
                 background: #506b9e;
+            }
+        }
+        .news-wrap {
+            width: 1160px;
+            margin: 0 auto;
+            margin-top: 10px;
+            .tit {
+                display: inline-block;
+                margin-right: 20px;
+                height: 40px;
+                line-height: 40px;
+                font-size: 20px;
+                &.dec {
+                    margin: 0 20px;
+                    font-size: 14px;
+                }
+            }
+            .tit-line {
+                display: inline-block;
+                width: 1px;
+                height: 20px;
+                border-left: 1px solid #e1e1e1;
             }
         }
     }

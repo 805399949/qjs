@@ -27,7 +27,7 @@ router.beforeEach((to, from, next) => {
   iView.LoadingBar.start()
   const token = getToken()
     
-  if (!token && to.name !== LOGIN_PAGE_NAME) {
+  if (!token && to.name !== LOGIN_PAGE_NAME) { // todo: 这里建议改成一个数组，首页等页面不需要登录
     // 未登录且要跳转的页面不是登录页
     next({
       name: LOGIN_PAGE_NAME // 跳转到登录页
