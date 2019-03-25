@@ -5,20 +5,47 @@
     </div>
     <div class="news-info">
       <div class="title">
-        <a href="/" title=""><b>这个重量是什么？</b></a>
+        <a href="/" title=""><b>{{ title }}</b></a>
       </div>
-      <div class="desc">你说是什么就是什么吧</div>
+      <div class="describe">{{ describe }}</div>
     </div>
     <div class="news-message">
-      <span class="message-name">stone</span>
-      <span class="message-time">2019-03-23</span>
+      <span class="message-name">{{ author }}</span>
+      <span class="message-time">{{ created | dateFormat }}</span>
     </div>
   </div>
 </template>
 
 <script>
+import { dateFormat } from "@/lib/tools.js";
+
 export default {
-  name: 'BoxNews'
+  name: 'BoxNews',
+  props: {
+    imgUrl: {
+      type: [ Object, String, ],
+      default: '@/assets/img/logo.png',
+    },
+    title: {
+      type: [ Object, String, ],
+      default: '文章标题',
+    },
+    describe: {
+      type: [ Object, String, ],
+      default: '文章简介',
+    },
+    author: {
+      type: [ Object, String, ],
+      default: '作者标签',
+    },
+    created: {
+      type: [ Object, String, Number, ],
+      default: null,
+    }
+  },
+  filters: {
+    dateFormat,
+  },
 }
 </script>
 

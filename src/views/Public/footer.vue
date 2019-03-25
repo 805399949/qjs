@@ -1,6 +1,6 @@
 <template>
   <div class="footer-wrap">
-    <div class="sections">
+    <div class="sections clearfix">
       <section class="about-section">
         <h3>关于我们</h3>
         <div class="about-content">关于我们内容</div>
@@ -41,7 +41,6 @@ export default {
     width: 1160px;
     margin: 0 auto;
     padding: 25px 0 15px;
-    overflow: hidden;
     section {
       width : 25%;
       float: left;

@@ -22,21 +22,14 @@
         <span class="tit-line"></span>
         <p class="tit dec">我们将为您提供最新，最有价值的信息</p> 
       </div>
-      <div class="news-content">
-        <div class="news-item">
-          <newsBox></newsBox>
-        </div>
-        <div class="news-item">
-          <newsBox></newsBox>
-        </div><div class="news-item">
-          <newsBox></newsBox>
-        </div>
-        <div class="news-item">
-          <newsBox></newsBox>
-        </div><div class="news-item">
-          <newsBox></newsBox>
-        </div><div class="news-item">
-          <newsBox></newsBox>
+      <div class="news-content clearfix">
+        <div class="news-item" v-for="(item, index) in newsList" :key="index">
+          <newsBox 
+            :title="item.title"
+            :describe="item.describe"
+            :author="item.author"
+            :created="item.created"
+          ></newsBox>
         </div>
       </div>
     </div>
@@ -45,6 +38,10 @@
 
 <script>
 import newsBox from "_c/news/boxNews";
+import {
+  mapState,
+} from 'vuex';
+import store from "@/store/index.js";
 
 export default {
   name: "qjs",
@@ -53,9 +50,17 @@ export default {
   },
   data() {
     return {
-      value2: 0
+      value2: 0,
     };
-  }
+  },
+  computed: {
+    ...mapState({
+      newsList: state => state.news.newsList,
+    }),
+  },
+  created () {
+    store.dispatch('getNewsList', {page: 0, number: 10});
+  },
 };
 </script>
 
@@ -98,7 +103,6 @@ export default {
       }
     }
     .news-content {
-      overflow: hidden;
       margin-top: 15px;
       .news-item {
         float: left;

@@ -1,6 +1,6 @@
 <template>
     <div class="home-wrap">
-        <v-header :selected="'home'"></v-header>
+        <v-header></v-header>
         <router-view></router-view>
         <v-footer></v-footer>
     </div>

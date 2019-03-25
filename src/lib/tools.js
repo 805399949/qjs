@@ -213,4 +213,61 @@ export const forEach = (arr, fn) => {
     /* eslint-disable-next-line */
     else return !keysArr1.some(key => obj1[key] != obj2[key])
   }
+
+  /**
+   * 是否是null或者undefined
+   *
+   * @param {} v 参数
+   *
+   * @return {boolean}
+   */
+  export function isUndef(v) {
+    return v === null || v === undefined;
+  }
+
+  /**
+   * 对于数字进行format操作
+   */
+  export function _format(number) {
+    if (number < 0) {
+        return number;
+    } else if (number < 10) {
+        return '0' + number;
+    } else {
+        return number;
+    }
+  }
+
+  /**
+   * 日期格式化
+   *
+   * @param {Date|Number} v UTC+08:00
+   * @param {String} format 格式内容
+   *
+   * @return {string} 经过format的日期数据
+   */
+  export function dateFormat(v, format) {
+    const type = typeof v;
+    if (isUndef(v) || (type !== 'number' && !(v instanceof Date)) || v === '') {
+      return v;
+    }
+    // 使用默认的format
+    if (!format) {
+      format = 'Y-m-d';
+    }
+    if (typeof v === 'number') {
+      v = new Date(v - 8 * 3600000);
+    } else {
+      v = new Date(v.valueOf() - 8 * 3600000);
+    }
+
+    format = format.replace('Y', v.getUTCFullYear());
+    format = format.replace('m', _format(v.getUTCMonth() + 1));
+    format = format.replace('d', _format(v.getUTCDate()));
+    format = format.replace('H', _format(v.getUTCHours()));
+    format = format.replace('i', _format(v.getUTCMinutes()));
+    format = format.replace('s', _format(v.getUTCSeconds()));
+
+    return format;
+  }
   
