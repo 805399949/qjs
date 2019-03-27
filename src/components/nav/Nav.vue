@@ -33,12 +33,6 @@
 <script>
 export default {
   name: "menulist",
-  props: {
-    selected: {
-      type: String,
-      default: "home",
-    },
-  },
   data() {
     return {
       listdata: [
@@ -86,7 +80,8 @@ export default {
           href: "app"
         }
       ],
-      openname: []
+      openname: [],
+      selected: 'home',
     };
   },
   methods: {
@@ -116,6 +111,9 @@ export default {
       this.watchRoute();
     }
   },
+  created() {
+    this.selected = this.$route.name || 'home';
+  },
   mounted() {
     this.watchRoute();
   }
@@ -123,7 +121,4 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.nav-wrap {
-
-}
 </style>
