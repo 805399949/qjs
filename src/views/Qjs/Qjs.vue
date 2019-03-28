@@ -22,9 +22,10 @@
         <span class="tit-line"></span>
         <p class="tit dec">我们将为您提供最新，最有价值的信息</p> 
       </div>
-      <div class="news-content clearfix">
-        <div class="news-item" v-for="(item, index) in newsList" :key="index">
+      <div class="news-content clearfix" ref="newsList">
+        <div class="news-item" v-for="(item, index) in newsList" :key="index" ref="newsItem">
           <newsBox 
+            :imgUrl="item.img"
             :title="item.title"
             :describe="item.describe"
             :author="item.author"
@@ -42,6 +43,7 @@ import {
   mapState,
 } from 'vuex';
 import store from "@/store/index.js";
+import { setTimeout } from 'timers';
 
 export default {
   name: "qjs",
@@ -58,8 +60,48 @@ export default {
       newsList: state => state.news.newsList,
     }),
   },
-  created () {
-    store.dispatch('getNewsList', {page: 0, number: 10});
+  methods: {
+    waterFall() {
+      let listRef = this.$refs.newsList, // 资讯列表整体包裹层
+          itemRef = this.$refs.newsItem, // 获取每一个资讯的div
+          len = itemRef.length, // 资讯个体的数量
+          itemRefWidth = itemRef[0].offsetWidth, // 资讯个体的 宽度
+          listRefWidth = 1160,
+          col = Math.floor(listRefWidth / itemRefWidth); // 展示列数 = 整体宽度 / 个体宽度
+      let img = itemRef[len - 1].getElementsByTagName('img')[0]; // 获取最后一个资讯里面的img
+      // 执行 img.onload 事件
+      img.onload = () => {
+        // 以下是瀑布流代码
+        let boxHeight = [];
+        console.log(itemRefWidth);
+        for (let i = 0; i < len; i++) {
+          if (i < col) {
+            boxHeight.push(itemRef[i].offsetHeight);
+          } else {
+            console.log(boxHeight);
+            let minH = Math.min.apply(null, boxHeight),
+                minIndex = boxHeight.indexOf(minH);
+            itemRef[i].style.cssText = `position:absolute;top:${minH}px;left:${minIndex * (itemRefWidth + 32)}px;`;
+            boxHeight[minIndex] += itemRef[i].offsetHeight;
+            console.log(minH, boxHeight[minIndex], minIndex);
+            console.log(itemRef[i].style.cssText, 'aj');
+          }
+        }
+        listRef.style.height = Math.max.apply(null, boxHeight) + 'px';
+        console.log(listRef.style.height, 'a');
+      }
+    },
+  },
+  created() {
+    store.dispatch('getNewsList', {page: 0, number: 8}).then(data => {
+      if (data.status === 200) {
+        this.$nextTick(() => {
+          setTimeout(() => {
+            this.waterFall();
+          }, 0) 
+        });
+      }
+    });
   },
 };
 </script>
@@ -82,7 +124,7 @@ export default {
     height: auto;
     margin: 0 auto;
     margin-top: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     .tit-wrap {
       .tit {
         display: inline-block;
@@ -103,11 +145,13 @@ export default {
       }
     }
     .news-content {
+      position: relative;
       margin-top: 15px;
       .news-item {
         float: left;
         margin-left: 32px;
-        margin-bottom: 20px;
+        padding-bottom: 20px;
+        cursor: pointer;
       }
     }
   }

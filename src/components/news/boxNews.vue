@@ -1,7 +1,7 @@
 <template>
   <div class="box-news-wrap">
     <div class="pic">
-      <img src="@/assets/img/logo.png" alt="">
+      <img :src="imgUrl" alt="">
     </div>
     <div class="news-info">
       <div class="title">

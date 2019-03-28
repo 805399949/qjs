@@ -7,7 +7,10 @@
       </section>
       <section class="article-section">
         <h3>最火文章</h3>
-        <div class="about-content">最火文章内容</div>
+        <a href="/" class="article-content">《第一篇文章》</a>
+        <a href="/" class="article-content">《第二篇文章》</a>
+        <a href="/" class="article-content">《第三篇文章》</a>
+        <a href="/" class="article-content">《第四篇文章》</a>
       </section>
       <section class="partner-section">
         <h3>合作招商</h3>
@@ -20,7 +23,14 @@
       </section>
       <section class="tag-section">
         <h3>合作招商</h3>
-        <div class="about-content">合作招商内容</div>
+        <div class="tag-content">
+          <span class="tag-item">钱币</span>
+          <span class="tag-item">科技</span>
+          <span class="tag-item">生活</span>
+          <span class="tag-item">美食</span>
+          <span class="tag-item">科技</span>
+          <span class="tag-item">钱币</span>
+        </div>
       </section>
     </div>
   </div>
@@ -57,6 +67,30 @@ export default {
           font-size: 16px;
           color: #FFFFFF;
           margin-bottom: 10px;
+        }
+      }
+    }
+    .article-section {
+      .article-content {
+        display: block;
+        color: #ffffff;
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+    }
+    .tag-section {
+      .tag-content {
+        .tag-item {
+          display: inline-block;
+          padding: 5px 10px;
+          color: #ffffff;
+          font-size: 12px;
+          line-height: 14px;
+          border: 1px solid #ffffff;
+          border-radius: 5px;
+          margin-right: 10px;
+          margin-bottom: 10px;
+          cursor: pointer;
         }
       }
     }
