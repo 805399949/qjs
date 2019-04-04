@@ -7,13 +7,12 @@ import user from './module/user'
 import news from './module/news'
 
 Vue.use(Vuex)
-
 export default new Vuex.Store({
   state,
   mutations,
   actions,
   modules: {
     user,
-    news,
+    news
   }
 })

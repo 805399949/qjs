@@ -46,5 +46,16 @@ export default [
         component: () => import('@/views/Search/searchIndex.vue')
       }
     ]
+  },
+  {
+    path: '/postList',
+    name: 'postList',component: Home,
+    children: [
+      {
+        path: 'postList_page/:pKey/:cKey',
+        name: 'postList_page',
+        component: () => import('@/views/postList/postList.vue')
+      }
+    ]
   }
 ]

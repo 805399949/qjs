@@ -2294,14 +2294,6 @@ button::-moz-focus-inner {
 }
 .drag {
 	}
-.bm_h .o {
-	float:right;
-	background:url(../..//bbs_v4/images/bg_hor.png) no-repeat -60px -322px;
-	cursor:pointer;
-	margin-top:10px;
-	height:20px;
-	width:20px;
-}
 .bm_h .o_expand {
 	background-position:-80px -322px;
 }
@@ -2313,20 +2305,6 @@ button::-moz-focus-inner {
 }
 .bm_h .pn {
 	margin-top:4px;
-}
-.bm_h {
-	background:#74889b url(../..//bbs_v4/images/bg_hor.png) repeat-x 0 -346px;
-	border-radius:5px 5px 0 0;
-	box-shadow:0 1px 3px #bcbcbc;
-	color:#fff;
-	font-size:14px;
-	line-height:42px;
-	height:42px;
-	margin-bottom:5px;
-	padding:0 15px;
-	white-space:nowrap;
-	overflow:hidden;
-	text-shadow:0 1px 0 rgba(0,0,0,.32);
 }
 .bm_h h2 {
 	font-size:16px;

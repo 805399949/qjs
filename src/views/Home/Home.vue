@@ -1,7 +1,7 @@
 <template>
     <div class="home-wrap">
         <v-header></v-header>
-        <router-view></router-view>
+        <router-view class="routerView"></router-view>
         <v-footer></v-footer>
     </div>
 </template>
@@ -29,4 +29,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.routerView {
+    background: #ececec url(../../assets/img/bg.png) repeat fixed;
+}
 </style>

@@ -1,55 +1,6 @@
 <template>
   <div id="qjsForum">
-    <div class="wrap quick_services">
-      <ul class="user_links">
-        <li class="my">
-          <a href="home.php?mod=space&amp;uid=0">
-            <Icon class="user" size="28" type="ios-contact-outline"/>我的威锋
-          </a>
-        </li>
-        <li>
-          <a href="forum.php?mod=guide&amp;view=my">
-            <Icon type="md-reorder" class="subject" size="28"/>主题
-          </a>
-        </li>
-        <li>
-          <a href="forum.php?mod=guide&amp;view=my&amp;type=reply">
-            <Icon type="ios-undo-outline" class="reply" size="28"/>回复
-          </a>
-        </li>
-        <li>
-          <a href="home.php?mod=space&amp;do=favorite&amp;view=me">
-            <Icon type="ios-star-outline" class="fav" size="28"/>收藏
-          </a>
-        </li>
-        <!--<li><a href="home.php?mod=space&amp;do=friend"><i class="friend"><b></b></i>好友</a></li>-->
-        <li>
-          <a href="forum.php?mod=guide&amp;view=comm">
-            <Icon type="ios-chatbubbles-outline" class="newscommon" size="28"/>评论
-          </a>
-        </li>
-        <!--<li><a href="plugin.php?id=trends&amp;square=square"><i class="doing"><b></b></i>动态</a></li>-->
-        <!-- <li class="hide">
-          <a href="#">
-            <i class="mark">
-              <b></b>
-            </i>书签
-          </a>
-        </li>-->
-      </ul>
-      <ul class="links">
-        <!-- <li><a href="userapp.php">社区应用</a></li> -->
-        <li>
-          <a href="forum.php?mod=guide&amp;view=hot">最新热门</a>
-        </li>
-        <li>
-          <a href="forum.php?mod=guide&amp;view=digest">精华区</a>
-        </li>
-        <!-- <li><a href="#">社区服务</a></li>
-            <li><a href="#">会员列表</a></li>
-        <li><a href="#">统计排行</a></li>-->
-      </ul>
-    </div>
+    <ForumHeader/>
     <div id="wp" class="wp">
       <div class="wrap bbs_info">
         <ul>
@@ -80,13 +31,16 @@
                   <a href="forum.php?gid=184" style>{{ item.parentTitle }}</a>
                 </h2>
               </div>
-              <div id="category_184" class="bm_c" style>
+              <div class="bm_c" style>
                 <table cellspacing="0" cellpadding="0" class="fl_tb">
                   <tbody>
                     <template v-for='childItem in item.childList'>
                       <tr class="fl_row">
                         <td class="fl_icn" style="width: 72px;">
-                          <a href="thread-htm-fid-36.html">
+                          <a
+                            href="javascript:;"
+                            @click="toChildPostList(item.parentKey, childItem.childKey, item.parentTitle, childItem.childTitle)" :parentKey="item.parentKey" :childKey="childItem.childKey"
+                          >
                             <img
                               src="https://bbsimages.feng.com/data/attachment/common/19/common_36_icon.png"
                               align="left"
@@ -96,7 +50,11 @@
                         </td>
                         <td>
                           <h2>
-                            <a href="thread-htm-fid-36.html">{{ childItem.childTitle }}</a>
+                            <a
+                              href="javascript:;"
+                              @click="toChildPostList(item.parentKey, childItem.childKey, item.parentTitle, childItem.childTitle)" :parentKey="item.parentKey" :childKey="childItem.childKey">
+                              {{ childItem.childTitle }}
+                            </a>
                             <span class="count">今日:<em>{{ childItem.childTodayPost }}</em></span>
                           </h2>
                           <p class="xg2">{{ childItem.childDes }}</p>
@@ -240,11 +198,10 @@
 </template>
 
 <script>
+import ForumHeader from '@/components/forumHeader'
 import { getForumTitInfo, getPostSubareaList } from "@/api/forum";
-import {
-  setToken,
-  getToken
-} from '@/lib/util'
+import { setToken, getToken } from '@/lib/util'
+import { mapActions } from 'vuex'
 
 export default {
   name: "qjsForum",
@@ -254,12 +211,36 @@ export default {
       postSubareaList: null
     };
   },
+  components: {
+    ForumHeader
+  },
   methods: {
-    
+    ...mapActions([
+      'handleHeaderPath'
+    ]),
+    toChildPostList (pKey, cKey, secondPath, thirdPath) {
+      console.log(pKey, cKey)
+      this.$router.push({
+        name: 'postList_page',
+        params: {
+          pKey: pKey,
+          cKey: cKey,
+          path:{
+            firstPath: '论坛',
+            secondPath,
+            thirdPath
+          }
+        }
+      })
+      this.handleHeaderPath({
+        firstPath: '论坛',
+        secondPath,
+        thirdPath
+      })
+    }
   },
   created () {
     getForumTitInfo(getToken()).then(res => {
-      console.log(res)
       this.titInfo = res.data.titInfo      
     }).catch(err => {
       console.log(err)
@@ -275,34 +256,6 @@ export default {
 </script>
 
 <style>
-#wp .wp,
-#wp .wrap {
-  width: auto;
-}
-.wp,
-.wrap {
-  margin: 0 auto;
-  width: 980px;
-}
-.cl:before,
-.cl:after,
-.clearfix:before,
-.clearfix:after {
-  content: "\200b";
-  display: block;
-  height: 0;
-}
-.cl:after,
-.clearfix:after {
-  clear: both;
-}
-.cl,
-.clearfix {
-  *zoom: 1;
-}
-.hide {
-  display: none;
-}
 .xg2 {
   color: #666;
 }
@@ -312,57 +265,6 @@ export default {
   color: #5c7084;
 }
 
-/* 
-* quick_services style
-*/
-.quick_services {
-  background: url(../../assets/img/bg_hor.png) repeat-x;
-  border-radius: 5px 5px 0 0;
-  color: #fff;
-  margin-bottom: 6px;
-  height: 44px;
-}
-.quick_services li {
-  float: left;
-  font-size: 12px;
-  text-shadow: 0 -1px 0 #45535f;
-}
-.quick_services .user_links {
-  padding-top: 7px;
-  height: 44px;
-}
-.quick_services .user_links li {
-  padding: 0 10px 0 14px;
-}
-.quick_services .user_links .my {
-  float: right;
-  padding-right: 16px;
-}
-.quick_services li .user {
-  background-position: -140px -44px;
-  font-size: 28px;
-}
-.quick_services li i {
-  margin: -3px 5px 0 0;
-  vertical-align: middle;
-  *margin-top: 0;
-}
-.quick_services li a {
-  color: #fff;
-}
-.quick_services .user_links li a {
-  display: inline-block;
-  line-height: 28px;
-  vertical-align: top;
-}
-.quick_services .links {
-  display: inline;
-  float: right;
-  margin: -30px 120px 0 0;
-}
-.quick_services .links li {
-  padding-left: 12px;
-}
 /* 
 * bbs_info style
 */
@@ -409,61 +311,6 @@ export default {
 .bm,
 .bn {
   margin-bottom: 10px;
-}
-.bm_h .o {
-  float: right;
-  background: url(../../assets/img/bg_hor.png) no-repeat -60px -322px;
-  cursor: pointer;
-  margin-top: 10px;
-  height: 20px;
-  width: 20px;
-}
-.bm_h .o_expand {
-  background-position: -80px -322px;
-}
-.bm_h .o img {
-  display: none;
-}
-.bm_h .i {
-  padding-left: 10px;
-}
-.bm_h .pn {
-  margin-top: 4px;
-}
-.bm_h h2 {
-  font-size: 16px;
-  font-weight: normal;
-}
-.bm_h a,
-.bm_h a:hover {
-  color: #fff;
-}
-.y {
-  float: right;
-}
-.bm_h .y {
-  font-size: 12px;
-}
-.bm_h {
-  background: #74889b url(../../assets/img/bg_hor.png) repeat-x 0 -346px;
-  border-radius: 5px 5px 0 0;
-  box-shadow: 0 1px 3px #bcbcbc;
-  color: #fff;
-  font-size: 14px;
-  line-height: 42px;
-  height: 42px;
-  margin-bottom: 0;
-  padding: 0 15px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.32);
-}
-.bm_c {
-  background: #fff;
-  box-shadow: 0 1px 3px #bcbcbc;
-}
-.fl_tb {
-  width: 100%;
 }
 table {
   border-collapse: collapse;
