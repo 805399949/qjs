@@ -73,22 +73,17 @@ export default {
       img.onload = () => {
         // 以下是瀑布流代码
         let boxHeight = [];
-        console.log(itemRefWidth);
         for (let i = 0; i < len; i++) {
           if (i < col) {
             boxHeight.push(itemRef[i].offsetHeight);
           } else {
-            console.log(boxHeight);
             let minH = Math.min.apply(null, boxHeight),
                 minIndex = boxHeight.indexOf(minH);
             itemRef[i].style.cssText = `position:absolute;top:${minH}px;left:${minIndex * (itemRefWidth + 32)}px;`;
             boxHeight[minIndex] += itemRef[i].offsetHeight;
-            console.log(minH, boxHeight[minIndex], minIndex);
-            console.log(itemRef[i].style.cssText, 'aj');
           }
         }
         listRef.style.height = Math.max.apply(null, boxHeight) + 'px';
-        console.log(listRef.style.height, 'a');
       }
     },
   },

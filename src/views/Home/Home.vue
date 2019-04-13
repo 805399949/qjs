@@ -1,7 +1,9 @@
 <template>
     <div class="home-wrap">
         <v-header></v-header>
-        <router-view class="routerView"></router-view>
+        <div class="routerView">
+            <router-view></router-view>
+        </div>
         <v-footer></v-footer>
     </div>
 </template>

@@ -44,7 +44,12 @@ export default [
         path: 'search_page',
         name: 'search_page',
         component: () => import('@/views/Search/searchIndex.vue')
-      }
+      },
+      {
+        path: 'search_result',
+        name: 'search_result',
+        component: () => import('@/views/Search/searchResult.vue')
+      },
     ]
   },
   {
@@ -55,6 +60,18 @@ export default [
         path: 'postList_page/:pKey/:cKey',
         name: 'postList_page',
         component: () => import('@/views/postList/postList.vue')
+      }
+    ]
+  },
+  {
+    path: '/news',
+    name: 'news',
+    component: Home,
+    children: [
+      {
+        path: 'news_list',
+        name: 'news_list',
+        component: () => import('@/views/News/newsList.vue')
       }
     ]
   }

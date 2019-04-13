@@ -44,7 +44,7 @@ export default {
         {
           name: "资讯",
           icon: ["ixitong", "cipp"],
-          href: "report"
+          href: "news_list"
         },
         {
           name: "论坛",
