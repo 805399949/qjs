@@ -22,19 +22,27 @@
           </div>
           <div class="hot-news">
             <ul>
-              <li>
+              <li v-for="(item, index) in contentList" :key="index">
                 <div class="news-content news-one">
-                  <h1 class="news-title"><a href="https://www.feng.com/iPhone/news/2019-04-10/Apple-cancelled-Mac-upgrade-and-maintenance-charge-of-data-migration_701204.shtml" target="_blank">苹果取消Mac升级和维修时收的数据迁移费</a> </h1>
-                  <div class="abs">自动同步工具和云备份早已取代手动数据迁移了。</div>
+                  <h1 class="news-title">
+                    <a href="/news/news_detail">{{item.title}}</a>
+                  </h1>
+                  <div class="abs">{{item.des}}</div>
                   <div class="news-users">
-                    <a href="https://www.feng.com/iPhone/news/2019-04-10/Apple-cancelled-Mac-upgrade-and-maintenance-charge-of-data-migration_701204.shtml#comment"><span class="comment"></span>0</a>
-                    <a href="javascript:;"><span class="read"></span>0</a>
+                    <!-- <a :href="item.link">
+                      <span class="comment"></span>{{item.comment}}
+                    </a> -->
+                    <a href="javascript:;">
+                      <span class="read"></span>{{item.read}}
+                    </a>
                     <!--这里有几个状态 分别为 独家dujia 热门remen 推广tuiguang 三个css-->
-                    <span class="time dujia">5分钟前</span>
+                    <span class="time dujia">{{item.createDate}}</span>
                   </div>
                 </div>
                 <div class="news-one-img">
-                  <a href="https://www.feng.com/iPhone/news/2019-04-10/Apple-cancelled-Mac-upgrade-and-maintenance-charge-of-data-migration_701204.shtml" target="_blank"><img src="http://img1.feng.com/1/h062/h40/c453737cimg201904101709340_214__142.jpg" height="142" width="214" alt="苹果取消Mac升级和维修时收的数据迁移费"></a>
+                  <a :href="item.link">
+                    <img :src="item.img" height="142" width="214" :alt="item.title">
+                  </a>
                 </div>
               </li>				
             </ul>
@@ -67,6 +75,39 @@
 <script>
 export default {
   name: 'NewsList',
+  data() {
+    return {
+      contentList: [
+        {
+          link: 'link1',
+          title: '苹果取消Mac升级和维修时收的数据迁移费1',
+          des: '自动同步工具和云备份早已取代手动数据迁移了。1',
+          createDate: '1分钟前',
+          comment: 10,
+          read: 20,
+          img: 'http://img1.feng.com/1/h062/h40/c453737cimg201904101709340_214__142.jpg',
+        },
+        {
+          link: 'link2',
+          title: '苹果取消Mac升级和维修时收的数据迁移费2',
+          des: '自动同步工具和云备份早已取代手动数据迁移了。2',
+          createDate: '2分钟前',
+          comment: 10,
+          read: 20,
+          img: 'http://img1.feng.com/1/h062/h40/c453737cimg201904101709340_214__142.jpg',
+        },
+        {
+          link: 'link3',
+          title: '苹果取消Mac升级和维修时收的数据迁移费3',
+          des: '自动同步工具和云备份早已取代手动数据迁移了。3',
+          createDate: '3分钟前',
+          comment: 10,
+          read: 20,
+          img: 'http://img1.feng.com/1/h062/h40/c453737cimg201904101709340_214__142.jpg',
+        }
+      ]
+    };
+  },
 }
 </script>
 

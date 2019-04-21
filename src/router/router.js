@@ -72,6 +72,11 @@ export default [
         path: 'news_list',
         name: 'news_list',
         component: () => import('@/views/News/newsList.vue')
+      },
+      {
+        path: 'news_detail',
+        name: 'news_detail',
+        component: () => import('@/views/News/newsDetail.vue')
       }
     ]
   }
