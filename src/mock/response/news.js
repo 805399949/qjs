@@ -75,5 +75,19 @@ Mock.mock(/news\/list/, {
       author: '作者2',
       created: 1552432879333,
     },
+    {
+      img: 'http://www.pptok.com/wp-content/uploads/2012/08/xunguang-4.jpg',
+      title: '文章11',
+      describe: '简介2',
+      author: '作者2',
+      created: 1552432879333,
+    },
+    {
+      img: 'http://www.pptok.com/wp-content/uploads/2012/08/xunguang-4.jpg',
+      title: '文章12',
+      describe: '简介2',
+      author: '作者2',
+      created: 1552432879333,
+    },
   ],
 });

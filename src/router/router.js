@@ -44,7 +44,12 @@ export default [
         path: 'search_page',
         name: 'search_page',
         component: () => import('@/views/Search/searchIndex.vue')
-      }
+      },
+      {
+        path: 'search_result',
+        name: 'search_result',
+        component: () => import('@/views/Search/searchResult.vue')
+      },
     ]
   },
   {
@@ -60,14 +65,19 @@ export default [
     ]
   },
   {
-    path: '/postDetail',
-    name: 'postDetail',
+    path: '/news',
+    name: 'news',
     component: Home,
     children: [
       {
-        path: 'postDetail_page/:postId',
-        name: 'postDetail_page',
-        component: () => import('@/views/PostDetail/PostDetail.vue')
+        path: 'news_list',
+        name: 'news_list',
+        component: () => import('@/views/News/newsList.vue')
+      },
+      {
+        path: 'news_detail',
+        name: 'news_detail',
+        component: () => import('@/views/News/newsDetail.vue')
       }
     ]
   }

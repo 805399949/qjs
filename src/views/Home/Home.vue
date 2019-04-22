@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div class="home-wrap">
     <v-header v-if='isRouterAlive'>
       <a slot="logo" href="javascript:;" @click="handleClickLogo">
@@ -8,6 +9,15 @@
     <router-view class="routerView"></router-view>
     <v-footer></v-footer>
   </div>
+=======
+    <div class="home-wrap">
+        <v-header></v-header>
+        <div class="routerView">
+            <router-view></router-view>
+        </div>
+        <v-footer></v-footer>
+    </div>
+>>>>>>> temp
 </template>
 
 <script>
