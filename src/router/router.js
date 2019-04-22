@@ -49,12 +49,25 @@ export default [
   },
   {
     path: '/postList',
-    name: 'postList',component: Home,
+    name: 'postList',
+    component: Home,
     children: [
       {
         path: 'postList_page/:pKey/:cKey',
         name: 'postList_page',
         component: () => import('@/views/postList/postList.vue')
+      }
+    ]
+  },
+  {
+    path: '/postDetail',
+    name: 'postDetail',
+    component: Home,
+    children: [
+      {
+        path: 'postDetail_page/:postId',
+        name: 'postDetail_page',
+        component: () => import('@/views/PostDetail/PostDetail.vue')
       }
     ]
   }

@@ -4,58 +4,45 @@
     <div class="wp" style="padding-bottom: 15px">
       <div id="pt" class="bbs_info crumbs">
         <div class="crumbs_inner" v-if="headerPath">
-          <a href="./" class="home" title="首页">钱交所</a>
+          <a @click="handlePathClick('/home')" href="javascript:;" class="home" title="首页">钱交所</a>
           <em>»</em>
-          <a href="forum.php">{{ headerPath.firstPath }}</a>
+          <a
+            @click="handlePathClick('/forum/forum_page')"
+            href="javascript:;"
+          >{{ headerPath.firstPath }}</a>
           <em>›</em>
-          <a href="forum.php?gid=223">{{ headerPath.secondPath }}</a>
+          <a href="javascript:;">{{ headerPath.secondPath.secondPath }}</a>
           <em>›</em>
-          <a href="thread-htm-fid-602.html">{{ headerPath.thirdPath }}</a>
+          <a href="javascript:;">{{ headerPath.thirdPath.thirdPath }}</a>
         </div>
       </div>
       <div class="postListContent wp">
         <div class="categoryDes">
           <div class="bm_h cl">
-            <span class="o" id="forum_rules_657_trigger" @click="toggle_collapse()" title="收起/展开"></span>
-            <span class="y pipe">&nbsp;</span>
-            <span class="y">
-              <a
-                id="forumarchive"
-                href="javascript:;"
-                class="fa_achv hide"
-                onmouseover="showMenu(this.id)"
-              >存档</a>
-              <span class="pipe hide">|</span>
-            </span>
+            <span class="o" @click="toggle_collapse()" title="收起/展开"></span>
             <h2>
-              <a href="thread-htm-fid-657.html">{{ headerPath.thirdPath }}</a>
+              <a href="thread-htm-fid-657.html">{{ headerPath.thirdPath.thirdPath }}</a>
             </h2>
           </div>
 
           <div class="forum_info">
-            <a href="thread-htm-fid-671.html" class="icon">
-              <img src="../../assets/img/logo.png" height="72" width="72" alt="iPhone XR 综合讨论区">
+            <a href="javascript:;" class="icon">
+              <img src="../../assets/img/logo.png" height="72" width="72" :alt="headerPath.thirdPath.thirdPath">
             </a>
 
             <div class="forum_funs clearfix">
               <ul>
                 <li>
-                  <a
-                    href="home.php?mod=spacecp&amp;ac=favorite&amp;type=forum&amp;id=671&amp;handlekey=favoriteforum"
-                    onclick="showWindow(this.id, this.href, 'get', 0);"
-                    id="a_favorite"
-                  >
+                  <a href="javascript:;" id="a_favorite">
                     <i class="fav"></i>收藏本版
                     <em id="number_favorite">
-                      (
-                      <b id="number_favorite_num">8551</b>)
+                      (<b id="number_favorite_num">{{ subareaInfo && subareaInfo.followers ? subareaInfo.followers : 0 }}</b>)
                     </em>
                   </a>
                 </li>
                 <li>
                   <a
-                    href="forum.php?mod=rss&amp;fid=671&amp;auth=d446%2BVioEtC%2Fd3p7JaDadAEI9Syf0nVVuR%2FwD7FjfLMrJquUGlJYrzHmXgHu3xsOFVQ"
-                    target="_blank"
+                    href="javascript:;"
                     title="RSS"
                   >
                     <i class="rss"></i>订阅本版
@@ -65,14 +52,14 @@
             </div>
             <div class="forum_props">
               <div class="count">
-                <span>今日:</span>
-                <em>1621</em>
-                <span>主题:</span>
-                <em>14581</em>
-                <span>帖子数:</span>
-                <em>222748</em>
+                <span>今日回帖:</span>
+                <em>{{ subareaInfo && subareaInfo.todayReply ? subareaInfo.todayReply : 0 }}</em>
+                <span>全部主题:</span>
+                <em>{{ subareaInfo && subareaInfo.totalPosts ? subareaInfo.totalPosts : 0 }}</em>
+                <span>全部回帖:</span>
+                <em>{{ subareaInfo && subareaInfo.allReply ? subareaInfo.allReply : 0 }}</em>
               </div>
-              <div class="desc">iPhone XR，多彩机身，超长续航，搭配顶尖Liquid LCD屏，哪一面都是亮点！</div>
+              <div class="desc">{{ subareaInfo && subareaInfo.subareaDes ? subareaInfo.subareaDes : '暂无介绍' }}</div>
             </div>
           </div>
           <div class="forum_rules" style>
@@ -83,27 +70,10 @@
               <i class="f_l"></i>
               <i class="f_r"></i>
             </div>
-            <div class="inner">
-              <a
-                href="https://bbs.feng.com/read-htm-tid-7940899.html"
-                target="_blank"
-              >威锋网 威锋论坛总版规-规章制度[细则] 点击阅读</a>
-              <br>
-              <br>本版块为Apple秋季发布会综合讨论区，为保持良好的讨论环境，请遵守以下版规：
-              <br>1、禁止一切形式的广告、代购、求购、黄牛党炫耀帖、政治帖及涉黄内容
-              <br>2、禁止QQ、QQ群、微信、微博、网赚等一切形式的推广信息，禁止外链广告
-              <br>3、谢绝冒名发布原创帖
-              <br>4、谢绝人身攻击，谢绝粗口，谢绝涉及政治的言论
-              <br>5、谢绝纯表情、纯标点、乱码以及其他一切无意义的发贴回帖，禁止刷版刷分
-              <br>6、谢绝标题党、谣言、误导、假消息，标题请勿用任何无意义符号加长
-              <br>7、诚意分享请直接贴出资源，禁止要求锋友留邮箱、加QQ或关注微信等分享方式
-              <br>8、发布等级庆祝贴散分、求加分者将删帖并扣除该帖所得积分以警告！严重者禁言处理
-              <br>
-              <br>友情提示：发布交易帖及隐性代购帖请移步交易区或二手区，否则严惩
-            </div>
+            <div class="inner" v-html="subareaInfo && subareaInfo.subareaNotice ? subareaInfo.subareaNotice : '暂无介绍'"></div>
           </div>
         </div>
-        <div id="pgt1" style="overflow: hidden; margin-bottom: 10px">
+        <div class="pgt1" style="overflow: hidden; margin-bottom: 10px">
           <div class="pager cl">
             <div class="back_pg">
               <a href="forum.php">
@@ -129,7 +99,7 @@
         </div>
         <div class="categoryDesCon cl">
           <div class="th">
-            <Select v-model="posConType" size="small" style="width:80px" placeholder="全部主题">
+            <Select :model.sync="postSubjectType" size="small" style="width:80px" placeholder="全部主题">
               <Option
                 v-for="item in postConTypeList"
                 :value="item.value"
@@ -218,25 +188,38 @@
             <h2>快速发帖</h2>
           </div>
           <Editor-bar :isClear="isClear" @change="change">
-            <div slot="postTitle">
-              <Select v-model="coinType" style="width:150px; margin: 0px 10px 10px 0px" placement="top-start" placeholder="选择主题分类">
+            <div slot="fastPostingTitle">
+              <Select
+                v-model="fastPostingType"
+                style="width:150px; margin: 0px 10px 10px 0px"
+                placement="top-start"
+                placeholder="选择主题分类"
+              >
                 <Option
                   v-for="item in postConTypeList"
                   :value="item.value"
                   :key="item.value"
                 >{{ item.label }}</Option>
               </Select>
-              <Input id="postTitInput" v-model="postTitle" placeholder="最多输入120个字符" @keyup.native="handlePostTitInput()" clearable style="width: 350px; margin: 0px 10px 10px 0px" />
-              <span id="subjectchk">还可输入
-              <strong id="checklen" style="color: #FF0000">{{ titMaxLen }}</strong>
-                  个字符
+              <Input
+                id="postTitInput"
+                v-model="fastPostingTitle"
+                placeholder="最多输入120个字符"
+                @keyup.native="handlePostTitInput()"
+                clearable
+                style="width: 350px; margin: 0px 10px 10px 0px"
+              />
+              <span id="subjectchk">
+                还可输入
+                <strong id="checklen" style="color: #FF0000">{{ titMaxLen }}</strong>
+                个字符
               </span>
             </div>
           </Editor-bar>
           <p slot="fastSendPost" class="fastSendPost">
             <Button type="primary" :loading="sendPostLoading" @click="fastPosting">
-                <span v-if="!sendPostLoading">发表帖子</span>
-                <span v-else>Loading...</span>
+              <span v-if="!sendPostLoading">发表帖子</span>
+              <span v-else>Loading...</span>
             </Button>
           </p>
         </div>
@@ -246,42 +229,51 @@
 </template>
 
 <script>
-import ForumHeader from "@/components/forumHeader";
-import { setToken, getToken } from "@/lib/util";
-import { getRelativeTime, isMillisecond, getDate, checkLength } from "@/lib/tools";
-import { getPostList } from "@/api/forum";
-import EditorBar from "@/components/editor";
+import ForumHeader from "@/components/forumHeader"
+import { setToken, getToken } from "@/lib/util"
+import {
+  getRelativeTime,
+  isMillisecond,
+  getDate,
+  checkLength
+} from "@/lib/tools"
+import { getPostList } from "@/api/forum"
+import EditorBar from "@/components/editor"
+import { mapActions } from "vuex"
+
 export default {
   name: "postList",
   data() {
     return {
       //   headerPath: null
-      sendPostLoading: false,
-      posConType: "",
-      postTitle: "",
-      coinType: "",
-      titMaxLen: 120,
+      sendPostLoading: false, // 发帖lodaing
+      postSubjectType: "", // 帖子主题类型
+      fastPostingTitle: "", // 发帖的帖子标题
+      fastPostingType: "", // 发帖的帖子类型
+      titMaxLen: 120, // 标题最大字符串长度
       editor: {
         detail: ""
       },
-      isClear: false,
+      isClear: false, // 清空发帖框内容
       postConTypeList: [
         {
-          value: "全部主题",
-          label: "allType"
+          value: "allType",
+          label: "全部主题"
         },
         {
-          value: "投票",
-          label: "votePost"
+          value: "votePost",
+          label: "投票"
         }
       ],
-      postTotalNum: null,
+      postTotalNum: null, // 帖子总数 (用于分页)
+      // 帖子列表
       postList: {
-        columns: [],
-        data: [],
-        globalTopData: [],
-        localTopData: []
-      }
+        columns: [],  // 表格每一列的渲染规则
+        data: [], // 列表数据
+        globalTopData: [], // 从列表数据中分离出的全局置顶帖
+        localTopData: [] // 从列表数据中分离出的局部置顶帖
+      },
+      subareaInfo: null
     };
   },
   components: {
@@ -295,18 +287,53 @@ export default {
       if (this.$store.state.headerPath === 0 && headerPath) {
         this.$store.commit("setHeaderPath", headerPath); //同步操作
       }
-      console.log(headerPath);
       return this.$store.state.headerPath;
     }
   },
+  methods: {
+    ...mapActions(["handleSelected"]),
+    toggle_collapse() {
+      console.log(1);
+    },
+    // 点击头部路径 进行跳转
+    handlePathClick(path) {
+      console.log(this.headerPath);
+      if (path === "/home") {
+        this.handleSelected("home");
+        this.$router.push({
+          path
+        })
+      } else {
+        this.$router.push({
+          path
+        })
+      }
+    },
+    getDateTimeStamp(dateStr) {
+      return Date.parse(dateStr.replace(/-/gi, "/"));
+    },
+    change() {
+      console.log("change");
+      console.log(this.editor.detail);
+    },
+    handlePostTitInput() {
+      console.log(123123);
+      checkLength(this.fastPostingTitle, "postTitInput", "checklen", this.titMaxLen);
+    },
+    fastPosting() {
+      this.sendPostLoading = !this.sendPostLoading;
+    }
+  },
   created() {
+    this.handleSelected("forum_page");
     // 获取页面数据
     getPostList(getToken(), {
-      type: this.headerPath.secondPath,
-      name: this.headerPath.thirdPath
+      type: this.headerPath.secondPath.secondPath,
+      name: this.headerPath.thirdPath.thirdPath
     })
       .then(res => {
-        console.log(res);
+        this.subareaInfo = res.data.currentSubareaInfo
+
         // this.postList.data = res.data.postList;
         // 分离全局置顶数据 (测试阶段 暂时截取4条)
         for (let i = 0; i < res.data.postList.length; i++) {
@@ -386,9 +413,7 @@ export default {
                   title: iconTypeDes
                 },
                 on: {
-                  click: () => {
-                    console.log(111);
-                  }
+                  click: () => {}
                 }
               });
             }
@@ -399,7 +424,7 @@ export default {
             key: "con",
             width: "610",
             render: (h, params) => {
-              let postConPgt = [
+              let postTitCol = [
                 h(
                   "p",
                   {
@@ -410,18 +435,27 @@ export default {
                       fontSize: "14px"
                       // width: "450px"
                     },
+                    attrs: {
+                      postId: params.row.postId
+                    },
                     on: {
                       click: () => {
-                        console.log(111);
+                        let currentParams = this.$route.params;
+                        currentParams.postId = params.row.postId;
+                        currentParams.postTit = params.row.postTit;
+                        this.$router.push({
+                          name: "postDetail_page",
+                          params: currentParams
+                        });
                       }
                     }
                   },
-                  params.row.postCon
+                  params.row.postTit
                 )
               ];
               for (let i = 1; i < Math.ceil(params.row.replyNum / 10); i++) {
                 if (i <= 5)
-                  postConPgt.push(
+                  postTitCol.push(
                     h(
                       "span",
                       {
@@ -445,8 +479,8 @@ export default {
                     )
                   );
                 else {
-                  postConPgt.push(h("span", "..."));
-                  postConPgt.push(
+                  postTitCol.push(h("span", "..."));
+                  postTitCol.push(
                     h(
                       "span",
                       {
@@ -472,7 +506,7 @@ export default {
                   break;
                 }
               }
-              postConPgt.push(
+              postTitCol.push(
                 h("Icon", {
                   style: {
                     cursor: "pointer",
@@ -504,7 +538,7 @@ export default {
                         display: "inline-block"
                       }
                     },
-                    postConPgt
+                    postTitCol
                   )
                 ]
               );
@@ -575,313 +609,12 @@ export default {
     thSelectText.style.cssText = "height: 32px; line-height: 32px; color: #fff";
     thSelectIcon.style.color = "#fff";
     //=================================================================================
-  },
-  methods: {
-    toggle_collapse() {
-      console.log(1);
-    },
-    getDateTimeStamp(dateStr) {
-      return Date.parse(dateStr.replace(/-/gi, "/"));
-    },
-    change() {
-      console.log("change");
-      console.log(this.editor.detail);
-    },
-    handlePostTitInput () {
-      console.log(123123)
-      checkLength(this.postTitle, 'postTitInput', 'checklen', this.titMaxLen)
-    },
-    fastPosting () {
-      this.sendPostLoading = !this.sendPostLoading
-    }
   }
 };
 </script>
 
 <style lang="less" scoped>
-.crumbs {
-  color: #fff;
-  text-shadow: 0 -1px 0 #4b5967;
-  clear: both;
-  overflow: hidden;
-}
-.bbs_info {
-  background: #576979 url(../../assets/img/bg_hor.png) repeat-x 0 -208px;
-  border-radius: 0 0 4px 4px;
-  color: #fff;
-  margin-bottom: 15px;
-  height: 34px;
-  text-shadow: 0 -1px 0 #39424c;
-}
-.crumbs .crumbs_inner {
-  padding: 0 10px;
-}
-
-.crumbs a,
-.crumbs em,
-.crumbs .current {
-  display: inline-block;
-  color: #fff;
-  line-height: 34px;
-  vertical-align: top;
-}
-
-.crumbs em,
-.crumbs .home {
-  background: url(../../assets/img/bg_hor.png) no-repeat -150px -312px;
-  line-height: 99px;
-  margin: 0 8px;
-  height: 34px;
-  width: 14px;
-  overflow: hidden;
-}
-
-.crumbs .home {
-  background-position: -120px -302px;
-  margin: 7px 0 0 10px;
-  height: 20px;
-  width: 20px;
-}
-
-.bm_h {
-  background: #74889b url(../../assets/img/bg_hor.png) repeat-x 0 -346px;
-  border-radius: 5px 5px 0 0;
-  box-shadow: 0 1px 3px #bcbcbc;
-  color: #fff;
-  font-size: 14px;
-  line-height: 42px;
-  height: 42px;
-  // margin-bottom: 5px;
-  padding: 0 15px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.32);
-}
-
-.postListContent {
-  background: none;
-  border: 0;
-  box-shadow: none;
-  width: auto;
-  min-height: 300px;
-}
-
-.postListContent .categoryDes {
-  background: #fff;
-  box-shadow: 0 1px 3px #bcbcbc;
-  margin-bottom: 10px;
-  padding-bottom: 5px;
-  .forum_info {
-    padding: 24px 20px 20px 120px;
-    min-height: 66px;
-    .icon {
-      margin: -2px 0 0 -92px;
-      position: absolute;
-    }
-    .forum_funs {
-      font-size: 0;
-      height: 0;
-      position: relative;
-      ul {
-        font-size: 12px;
-        position: absolute;
-        right: 0;
-        top: 0;
-      }
-      li {
-        float: left;
-        padding-left: 15px;
-        a {
-          color: #666;
-        }
-      }
-      i {
-        display: inline-block;
-        background: url(../../assets/img/bg_hor.png) no-repeat -24px -388px;
-        cursor: pointer;
-        margin: -3px 0.3em 0 0;
-        height: 22px;
-        width: 22px;
-        overflow: hidden;
-        vertical-align: middle;
-        *margin-top: 0;
-      }
-      .fav {
-        background-position: -48px -388px;
-      }
-      em {
-        color: #f26c4f;
-        font-family: Arial;
-        margin-left: 0.4em;
-      }
-    }
-    .forum_props {
-      color: #333;
-      font-size: 14px;
-      .count {
-        margin-bottom: 5px;
-        em {
-          margin-right: 1em;
-        }
-      }
-      em,
-      a {
-        color: #6f7a83;
-        margin-left: 0.4em;
-      }
-      .desc {
-        color: #666;
-        font-size: 12px;
-        margin-bottom: 5px;
-      }
-    }
-  }
-  .forum_rules {
-    .s_title {
-      border-bottom: 1px solid #c5c5c5;
-      margin-bottom: 20px;
-      height: 10px;
-      position: relative;
-      h3 {
-        background: #fff;
-        color: #333;
-        font-size: 18px;
-        font-weight: normal;
-        line-height: 1.2;
-        margin: -1px 0 0 -58px;
-        width: 116px;
-        position: absolute;
-        left: 50%;
-        top: 0;
-        text-align: center;
-        i {
-          display: inline-block;
-          background: url(../../assets/img/bg_hor.png) no-repeat 0 -388px;
-          margin: -3px 0.3em 0 0;
-          height: 22px;
-          width: 22px;
-          vertical-align: middle;
-          overflow: hidden;
-          *margin-top: 0;
-        }
-      }
-      .f_l,
-      .f_r {
-        background: url(../../assets/img/bg_hor.png) no-repeat 0 -410px;
-        margin-top: 9px;
-        height: 1px;
-        width: 72px;
-        overflow: hidden;
-        position: absolute;
-        left: 0;
-        top: 0;
-      }
-      .f_r {
-        background-position: 0 -411px;
-        left: auto;
-        right: 0;
-      }
-    }
-    .inner {
-      color: #666;
-      line-height: 1.9;
-      padding: 10px 30px 20px;
-      overflow: hidden;
-      a {
-        color: #6f7a83;
-      }
-    }
-  }
-}
-
-.pager {
-  float: right;
-  background: #fff;
-  border-radius: 4px;
-  box-shadow: 0 1px 3px #bcbcbc;
-  padding: 0 5px;
-  .ivu-page {
-    float: left;
-    margin: 5px 0;
-  }
-  .back_pg {
-    float: left;
-    height: 42px;
-    a {
-      height: 100%;
-      line-height: 42px;
-      color: #333333;
-      padding: 0 20px 0 15px;
-      margin-left: 5px;
-    }
-  }
-}
-
-.new_thread,
-.new_thread span,
-.new_thread i {
-  float: left;
-  background: url(../../assets/img/bg_hor.png) no-repeat 100% -412px;
-  padding-right: 40px;
-  height: 46px;
-  -webkit-transition: all linear 0.2s;
-  -moz-transition: all linear 0.2s;
-  -ms-transition: all linear 0.2s;
-  transition: all linear 0.2s;
-}
-.new_thread {
-  background-position: 0 -412px;
-  color: #fff;
-  font-size: 16px;
-  line-height: 36px;
-  padding: 0 0 0 20px;
-  text-shadow: 0 0 5px rgba(0, 107, 183, 0.8);
-}
-.new_thread i {
-  background-position: -76px -388px;
-  margin: 6px 14px 0 0;
-  padding: 0;
-  height: 24px;
-  width: 28px;
-}
-.categoryDesCon {
-  position: relative;
-  margin-bottom: 10px;
-  .th {
-    background: #576979;
-    color: #fff;
-    padding: 0 15px;
-  }
-}
-.pgbtn {
-  margin-bottom: 10px;
-  zoom: 1;
-  overflow: hidden;
-  a {
-    display: block;
-    background: #eee;
-    border: 1px solid #dcdcdc;
-    box-shadow: 0 1px 0 #cbcbcb, inset 0 1px 0 #fff;
-    color: #666;
-    font-size: 16px;
-    line-height: 20px;
-    padding: 12px;
-    letter-spacing: 0.4em;
-    text-align: center;
-    text-shadow: 0 1px 0 #fff;
-    -webkit-transition: all linear 0.2s;
-    -moz-transition: all linear 0.2s;
-    -ms-transition: all linear 0.2s;
-    transition: all linear 0.2s;
-  }
-  a:hover {
-    background: #fff;
-  }
-}
-.fastSendPost {
-  line-height: 30px;
-  padding-top: 10px;
-}
+@import url('./postList');
 </style>
 
 

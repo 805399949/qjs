@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="editor">
-    <slot name="postTitle"></slot>
+    <slot name="fastPostingTitle"></slot>
     <div ref="toolbar" class="toolbar">
     </div>
     <div ref="editor" class="text">

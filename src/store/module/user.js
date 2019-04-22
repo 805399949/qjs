@@ -3,50 +3,35 @@ import {
   getUserInfo,
   logout
 } from '@/api/user'
+
 import {
   setToken,
-  getToken
+  getToken,
+  setUserInfoCookie,
+  getUserInfoCookie
 } from '@/lib/util'
 
 const state = {
-  userName: '',
-  userId: '',
-  avatorImgPath: '',
+  userInfo: getUserInfoCookie(),
   token: getToken(),
   access: '',
   hasGetInfo: false
 }
 
 const mutations = {
-  setAvator(state, avatorPath) {
-    state.avatorImgPath = avatorPath
-  },
-  setUserId(state, id) {
-    state.userId = id
-  },
-  setUserName(state, name) {
-    state.userName = name
-  },
-  setAccess(state, access) {
-    state.access = access
+  setUserInfo (state, userInfo) {
+    state.userInfo = userInfo
+    setUserInfoCookie(userInfo)
   },
   setToken(state, token) {
     state.token = token
     setToken(token)
-  },
-  setHasGetInfo(state, status) {
-    state.hasGetInfo = status
   }
 }
 
 const actions = {
   // 登录
-  handleLogin({
-    commit
-  }, {
-    userName,
-    password
-  }) {
+  handleLogin({ commit }, { userName, password }) {
     userName = userName.trim()
     return new Promise((resolve, reject) => {
       login({
@@ -62,22 +47,19 @@ const actions = {
     })
   },
   // 退出登录
-  handleLogOut({
-    state,
-    commit
-  }) {
+  handleLogOut({ state, commit }) {
     return new Promise((resolve, reject) => {
-      logout(state.token).then(() => {
-        commit('setToken', '')
-        commit('setAccess', [])
-        resolve()
-      }).catch(err => {
-        reject(err)
-      })
+      // logout(state.token).then(() => {
+      //   commit('setToken', '')
+      //   commit('setAccess', [])
+      //   resolve()
+      // }).catch(err => {
+      //   reject(err)
+      // })
       // 如果你的退出登录无需请求接口，则可以直接使用下面三行代码而无需使用logout调用接口
-      // commit('setToken', '')
-      // commit('setAccess', [])
-      // resolve()
+      commit('setToken', '')
+      commit('setUserInfo', {})
+      resolve()
     })
   },
   // 获取用户相关信息
@@ -85,13 +67,8 @@ const actions = {
     return new Promise((resolve, reject) => {
       try {
         getUserInfo(state.token).then(res => {
-          console.log(res)
           const data = res.data
-          commit('setAvator', data.avator)
-          commit('setUserName', data.name)
-          commit('setUserId', data.user_id)
-          commit('setAccess', data.access)
-          commit('setHasGetInfo', true)
+          commit('setUserInfo', data)
           resolve(data)
         }).catch(err => {
           reject(err)
@@ -107,6 +84,4 @@ export default {
   state,
   mutations,
   actions
-
-
 }

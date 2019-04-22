@@ -103,89 +103,6 @@
                         </td>
                       </tr>
                     </template>
-                    <!-- <tr class="fl_row">
-                      <td class="fl_icn" style="width: 72px;">
-                        <a href="thread-htm-fid-22.html">
-                          <img
-                            src="https://bbsimages.feng.com/data/attachment/common/b6/common_22_icon.png"
-                            align="left"
-                            alt
-                          >
-                        </a>
-                      </td>
-                      <td>
-                        <h2>
-                          <a href="thread-htm-fid-22.html">iPhone资源区</a>
-                          <span class="count">
-                            今日:
-                            <em>263</em>
-                          </span>
-                        </h2>
-                        <p class="xg2">
-                          iPhone的 [壁纸][主题][铃声]等资源的下载、交流及制作发布区，注意此区
-                          <strong>不打水印</strong>！
-                        </p>
-                        <p>
-                          版主:
-                          <span class="xi2">
-                            <a
-                              href="home.php?mod=space&amp;username=chuchuqiqi"
-                              class="notabs"
-                              c="1"
-                            >chuchuqiqi</a>,
-                            <a
-                              href="home.php?mod=space&amp;username=lpc6763"
-                              class="notabs"
-                              c="1"
-                            >lpc6763</a>,
-                            <a
-                              href="home.php?mod=space&amp;username=enganding"
-                              class="notabs"
-                              c="1"
-                            >enganding</a>,
-                            <a
-                              href="home.php?mod=space&amp;username=%E6%B2%A1%E4%BA%8B%E5%8F%91%E4%B8%AA%E5%91%86"
-                              class="notabs"
-                              c="1"
-                            >没事发个呆</a>
-                          </span>
-                        </p>
-                      </td>
-                      <td class="fl_i">
-                        <span class="xi2">
-                          <span title="81633">8万</span>
-                        </span>
-                        <span class="line">/</span>
-                        <span class="xg1">
-                          <span title="2070823">207万</span>
-                        </span>
-                      </td>
-                      <td class="fl_by">
-                        <div class="last_post">
-                          <a href="/home.php?mod=space&amp;username=longzhuabei" class="user_pic">
-                            <i class="mask"></i>
-                            <img
-                              src="https://face.feng.com/data/avatar/004/48/14/55_avatar_small.jpg"
-                              height="42"
-                              width="42"
-                              alt="longzhuabei"
-                            >
-                          </a>
-                          <span class="reply">
-                            <span>Re:</span>
-                            <a
-                              href="forum.php?mod=redirect&amp;tid=12095348&amp;goto=lastpost#lastpost"
-                              class="xi2"
-                            >精品彩插版收藏《来到地球第一天 ...</a>
-                          </span>
-                          <cite>
-                            by
-                            <a href="home.php?mod=space&amp;username=longzhuabei">longzhuabei</a>,
-                            <span title="2019-3-11 11:55">2 分钟前</span>
-                          </cite>
-                        </div>
-                      </td>
-                    </tr> -->
                   </tbody>
                 </table>
               </div>
@@ -216,37 +133,38 @@ export default {
   },
   methods: {
     ...mapActions([
-      'handleHeaderPath'
+      'handleHeaderPath',
+      "handleSelected"
     ]),
     toChildPostList (pKey, cKey, secondPath, thirdPath) {
-      console.log(pKey, cKey)
       this.$router.push({
         name: 'postList_page',
         params: {
-          pKey: pKey,
-          cKey: cKey,
-          path:{
-            firstPath: '论坛',
-            secondPath,
-            thirdPath
-          }
+          pKey,
+          cKey
         }
       })
       this.handleHeaderPath({
         firstPath: '论坛',
-        secondPath,
-        thirdPath
+        secondPath: {
+          pKey,
+          secondPath
+        },
+        thirdPath: {
+          cKey,
+          thirdPath
+        }
       })
     }
   },
   created () {
+    this.handleSelected("forum_page")
     getForumTitInfo(getToken()).then(res => {
       this.titInfo = res.data.titInfo      
     }).catch(err => {
       console.log(err)
     })
     getPostSubareaList(getToken()).then(res => {
-      console.log(res)
       this.postSubareaList = res.data.subList
     }).catch(err => {
       console.log(err)

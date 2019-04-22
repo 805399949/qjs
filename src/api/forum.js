@@ -27,10 +27,10 @@ export const getPostSubareaList = (token) => {
 export const getPostList = (token, data) => {
   return axios.request({
     url: 'getPostList',
-    params: {
+    data: {
       token,
       data
     },
-    method: 'get'
+    method: 'post'
   })
 }

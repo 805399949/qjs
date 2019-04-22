@@ -24,15 +24,15 @@ class HttpRequest {
   }
   distroy(url) {
     delete this.queue[url]
-    if (!Object.keys(this.queue).length) {
-      Spin.hide()
-    }
+    // if (!Object.keys(this.queue).length) {
+    //   Spin.hide()
+    // }
   }
   interceptors(instance, url) {
     instance.interceptors.request.use(config => {
       //请求之前添加操作 如全局的loading
       //Spin.show()
-      if (!Object.keys(this.queue).length) Spin.show()
+      // if (!Object.keys(this.queue).length) Spin.show()
       this.queue[url] = true
       return config
     }, error => {

@@ -80,17 +80,20 @@ export default {
           href: "app"
         }
       ],
-      openname: [],
-      selected: 'home',
+      openname: []
     };
+  },
+  computed: {
+    selected () {
+      console.log(this.$store.state.menu.selected)
+      return this.$store.state.menu.selected
+    }
   },
   methods: {
     menuselect(a) {
-      console.log(a,'a')
       this.$router.push({ name: a });
     },
     watchRoute() {
-      console.log(this.$route.name, 'wr')
       if (
         this.$refs.child &&
         this.$route.name != "submenu1" &&
@@ -103,7 +106,7 @@ export default {
       }
       this.$nextTick(() => {
         this.$refs.child.updateOpened();
-      });
+      })
     }
   },
   watch: {
@@ -112,7 +115,7 @@ export default {
     }
   },
   created() {
-    this.selected = this.$route.name || 'home';
+    // this.selected = this.$route.name || "home";
   },
   mounted() {
     this.watchRoute();
