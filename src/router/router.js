@@ -65,20 +65,33 @@ export default [
     ]
   },
   {
-    path: '/news',
-    name: 'news',
-    component: Home,
-    children: [
-      {
-        path: 'news_list',
-        name: 'news_list',
-        component: () => import('@/views/News/newsList.vue')
-      },
-      {
-        path: 'news_detail',
-        name: 'news_detail',
-        component: () => import('@/views/News/newsDetail.vue')
+      path: '/postDetail',
+      name: 'postDetail',
+      component: Home,
+      children: [
+          {
+            path: 'postDetail_page/:postId',
+            name: 'postDetail_page',
+            component: () => import('@/views/PostDetail/PostDetail.vue')
+        
       }
     ]
+  },
+  {
+    path: '/news',
+      name: 'news',
+      component: Home,
+      children: [
+        {
+          path: 'news_list',
+          name: 'news_list',
+          component: () => import('@/views/News/newsList.vue')
+        },
+        {
+          path: 'news_detail',
+          name: 'news_detail',
+          component: () => import('@/views/News/newsDetail.vue')
+        }
+      ]
   }
 ]

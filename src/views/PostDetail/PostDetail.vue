@@ -66,9 +66,8 @@ export default {
   },
   created() {
     this.handleSelected("forum_page");
-    console.log(this.$route);
   }
-};
+}
 </script>
 
 <style lang="less" scoped>

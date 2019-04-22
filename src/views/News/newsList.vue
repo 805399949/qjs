@@ -1,78 +1,82 @@
 <template>
-  <div class="news-list-wrap">
-    <div class="news-head">
-      <div class="news-title">
-        <h3>新闻</h3>
+  <div>
+    <div class="news-list-wrap">
+      <div class="news-head">
+        <div class="news-title">
+          <h3>新闻</h3>
+        </div>
+        <div class="tab-links"> <span>切换标签：</span>
+          <a href="">新闻</a>,
+          <a href="">科技</a>,
+          <a href="">观点</a>
+        </div>
       </div>
-      <div class="tab-links"> <span>切换标签：</span>
-        <a href="">新闻</a>,
-        <a href="">科技</a>,
-        <a href="">观点</a>
-      </div>
-    </div>
-    <div class="main clearfix">
-      <!--hot_spots-->
-      <div class="news-left">
-        <div class="hot-spots">
-          <div class="classifyNav bannerbox">
-            <a class="prev-btn" href="javascript:;" title="上一版" style="display: none;">&nbsp;</a>
-              <div class="classifyBox">
-              </div>
-            <a class="next-btn" href="javascript:;" title="下一版" style="display: inline;">&nbsp;</a>
-          </div>
-          <div class="hot-news">
-            <ul>
-              <li v-for="(item, index) in contentList" :key="index">
-                <div class="news-content news-one">
-                  <h1 class="news-title">
-                    <a href="/news/news_detail">{{item.title}}</a>
-                  </h1>
-                  <div class="abs">{{item.des}}</div>
-                  <div class="news-users">
-                    <!-- <a :href="item.link">
-                      <span class="comment"></span>{{item.comment}}
-                    </a> -->
-                    <a href="javascript:;">
-                      <span class="read"></span>{{item.read}}
-                    </a>
-                    <!--这里有几个状态 分别为 独家dujia 热门remen 推广tuiguang 三个css-->
-                    <span class="time dujia">{{item.createDate}}</span>
+      <div class="main clearfix">
+        <!--hot_spots-->
+        <div class="news-left">
+          <div class="hot-spots">
+            <div class="classifyNav bannerbox">
+              <a class="prev-btn" href="javascript:;" title="上一版" style="display: none;">&nbsp;</a>
+                <div class="classifyBox">
+                </div>
+              <a class="next-btn" href="javascript:;" title="下一版" style="display: inline;">&nbsp;</a>
+            </div>
+            <div class="hot-news">
+              <ul>
+                <li v-for="(item, index) in contentList" :key="index">
+                  <div class="news-content news-one">
+                    <h1 class="news-title">
+                      <a href="/news/news_detail">{{item.title}}</a>
+                    </h1>
+                    <div class="abs">{{item.des}}</div>
+                    <div class="news-users">
+                      <!-- <a :href="item.link">
+                        <span class="comment"></span>{{item.comment}}
+                      </a> -->
+                      <a href="javascript:;">
+                        <span class="read"></span>{{item.read}}
+                      </a>
+                      <!--这里有几个状态 分别为 独家dujia 热门remen 推广tuiguang 三个css-->
+                      <span class="time dujia">{{item.createDate}}</span>
+                    </div>
                   </div>
-                </div>
-                <div class="news-one-img">
-                  <a :href="item.link">
-                    <img :src="item.img" height="142" width="214" :alt="item.title">
-                  </a>
-                </div>
-              </li>				
-            </ul>
-            <div class="loading" id="loading" style="display:none"><i></i>加载更多</div>
+                  <div class="news-one-img">
+                    <a :href="item.link">
+                      <img :src="item.img" height="142" width="214" :alt="item.title">
+                    </a>
+                  </div>
+                </li>				
+              </ul>
+              <div class="loading" id="loading" style="display:none"><i></i>加载更多</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="news-right">
-        <div class="today-news">
-          <h2>今日<em>头条</em></h2>
-        </div>
-        <div class="hot-attention-news">
-          <h2 class="title">热门<em>关注</em></h2>
-          <ul>
-            <li><span class="hot-attention-sortnum">1</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-04/Apple-HomePod-prices-worldwide-legal-channels-straight-down-500-yuan_701174.shtml" title="苹果HomePod全球范围降价 国行直降500元">苹果HomePod全球范围降价 国行直降500元</a></p></li>
-            <li><span class="hot-attention-sortnum">2</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-04/Apple-stuck-again-embarrassed-Intel-chips-or-5-g-can-t-deliver-on-time_701172.shtml" title="苹果再陷尴尬 英特尔5G芯片或无法按时交货 ">苹果再陷尴尬 英特尔5G芯片或无法按时交货 </a></p></li>
-            <li><span class="hot-attention-sortnum">3</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-05/IOS-12.1.4-validation-is-now-closing-you-haven-t-rise-to-12.2_701176.shtml" title="iOS 12.1.4验证现已关闭 你还没升到12.2吗？">iOS 12.1.4验证现已关闭 你还没升到12.2吗？</a></p></li>
-            <li><span class="hot-attention-sortnum">4</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-09/Huawei-is-interested-in-foreign-sales-of-5-g-chips-but-only-sell-to-apple_701191.shtml" title="华为有兴趣对外销售5G芯片 但只卖给苹果">华为有兴趣对外销售5G芯片 但只卖给苹果</a></p></li>
-            <li><span class="hot-attention-sortnum">5</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-09/2019-iPhone-broke-again-or-send-five-new-handsets-this-year_701195.shtml" title="2019 iPhone爆料又来了 今年或发五款新机？">2019 iPhone爆料又来了 今年或发五款新机？</a></p></li>
-            <li><span class="hot-attention-sortnum">6</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-08/The-second-generation-AirPods-and-Beats-Powerbeats-Pro-you-which-to-choose_701187.shtml" title="二代AirPods和Beats Powerbeats Pro 你该选哪个？">二代AirPods和Beats Powerbeats Pro 你该选哪个？</a></p></li>
-            <li><span class="hot-attention-sortnum">7</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-04/Beats-release-true-wireless-headset-H1-chip-support-Hey-Siri_701170.shtml" title="Beats发布真无线耳机：H1芯片 支持Hey Siri">Beats发布真无线耳机：H1芯片 支持Hey Siri</a></p></li>
-            <li><span class="hot-attention-sortnum">8</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-06/Apple-Card-to-five-years-for-Apple-among-the-ten-big-Card-issuers_701178.shtml" title="Apple Card有望5年后让苹果跻身十大发卡方">Apple Card有望5年后让苹果跻身十大发卡方</a></p></li>
-          </ul>
+        <div class="news-right">
+          <div class="today-news">
+            <h2>今日<em>头条</em></h2>
+          </div>
+          <div class="hot-attention-news">
+            <h2 class="title">热门<em>关注</em></h2>
+            <ul>
+              <li><span class="hot-attention-sortnum">1</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-04/Apple-HomePod-prices-worldwide-legal-channels-straight-down-500-yuan_701174.shtml" title="苹果HomePod全球范围降价 国行直降500元">苹果HomePod全球范围降价 国行直降500元</a></p></li>
+              <li><span class="hot-attention-sortnum">2</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-04/Apple-stuck-again-embarrassed-Intel-chips-or-5-g-can-t-deliver-on-time_701172.shtml" title="苹果再陷尴尬 英特尔5G芯片或无法按时交货 ">苹果再陷尴尬 英特尔5G芯片或无法按时交货 </a></p></li>
+              <li><span class="hot-attention-sortnum">3</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-05/IOS-12.1.4-validation-is-now-closing-you-haven-t-rise-to-12.2_701176.shtml" title="iOS 12.1.4验证现已关闭 你还没升到12.2吗？">iOS 12.1.4验证现已关闭 你还没升到12.2吗？</a></p></li>
+              <li><span class="hot-attention-sortnum">4</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-09/Huawei-is-interested-in-foreign-sales-of-5-g-chips-but-only-sell-to-apple_701191.shtml" title="华为有兴趣对外销售5G芯片 但只卖给苹果">华为有兴趣对外销售5G芯片 但只卖给苹果</a></p></li>
+              <li><span class="hot-attention-sortnum">5</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-09/2019-iPhone-broke-again-or-send-five-new-handsets-this-year_701195.shtml" title="2019 iPhone爆料又来了 今年或发五款新机？">2019 iPhone爆料又来了 今年或发五款新机？</a></p></li>
+              <li><span class="hot-attention-sortnum">6</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-08/The-second-generation-AirPods-and-Beats-Powerbeats-Pro-you-which-to-choose_701187.shtml" title="二代AirPods和Beats Powerbeats Pro 你该选哪个？">二代AirPods和Beats Powerbeats Pro 你该选哪个？</a></p></li>
+              <li><span class="hot-attention-sortnum">7</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-04/Beats-release-true-wireless-headset-H1-chip-support-Hey-Siri_701170.shtml" title="Beats发布真无线耳机：H1芯片 支持Hey Siri">Beats发布真无线耳机：H1芯片 支持Hey Siri</a></p></li>
+              <li><span class="hot-attention-sortnum">8</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-06/Apple-Card-to-five-years-for-Apple-among-the-ten-big-Card-issuers_701178.shtml" title="Apple Card有望5年后让苹果跻身十大发卡方">Apple Card有望5年后让苹果跻身十大发卡方</a></p></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: 'NewsList',
   data() {
@@ -106,8 +110,14 @@ export default {
           img: 'http://img1.feng.com/1/h062/h40/c453737cimg201904101709340_214__142.jpg',
         }
       ]
-    };
+    }
   },
+  methods: {
+    ...mapActions(["handleHeaderPath", "handleSelected"])
+  },
+  created() {
+    this.handleSelected("news_list");
+  }
 }
 </script>
 
@@ -115,7 +125,7 @@ export default {
 .news-list-wrap {
   width: 1160px;
   margin: 0 auto;
-  overflow: auto;
+  position: relative;
   .news-head {
     margin-top: 25px;
     .news-title {

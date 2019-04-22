@@ -1,10 +1,6 @@
 import axios from 'axios'
 
 import {
-  baseURL
-} from '@/config'
-
-import {
   Spin
 } from 'iview'
 
