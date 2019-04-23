@@ -23,20 +23,44 @@
       <div class="postContentWrap">
         <div class="postConHead">
           <div class="postConHeadL">
-            <span class="postReadNum"><em>115</em>阅读</span>
+            <span class="postReadNum">
+              <em>115</em>阅读
+            </span>
             <span class="pipe">|</span>
-            <span class="postReplyNum"><em>15</em>回复</span>
+            <span class="postReplyNum">
+              <em>15</em>回复
+            </span>
           </div>
           <div class="postConHeadR">
-            <h4 class="postConTit">我在华强北自己花了3800组装了一个无面容 ID双卡256的max<a href="javascript:;">[复制链接]</a></h4>
+            <h4 class="postConTit">
+              我在华强北自己花了3800组装了一个无面容 ID双卡256的max
+              <a href="javascript:;">[复制链接]</a>
+            </h4>
             <div class="postHandle">
-              <span><Icon type="ios-trash" size="20" color="#fff"/></span>
-              <span><Icon type="ios-print" size="20" color="#fff"/></span>
-              <span><Icon type="md-arrow-round-back" size="20" color="#fff"/></span>
-              <span><Icon type="md-arrow-round-forward" size="20" color="#fff"/></span>
+              <span @click="postTitHandle('del')">
+                <Icon type="ios-trash" size="20" color="#fff"/>
+              </span>
+              <span @click="postTitHandle('print')">
+                <Icon type="ios-print" size="20" color="#fff"/>
+              </span>
+              <span @click="postTitHandle('previous')">
+                <Icon type="md-arrow-round-back" size="20" color="#fff"/>
+              </span>
+              <span @click="postTitHandle('next')">
+                <Icon type="md-arrow-round-forward" size="20" color="#fff"/>
+              </span>
             </div>
           </div>
         </div>
+        <Table
+          id="replyList"
+          v-if="replyColumns && replyData"
+          style="border: 0"
+          :columns="replyColumns"
+          :data="replyData"
+          :show-header="false"
+          disabled-hover
+        ></Table>
       </div>
     </div>
   </div>
@@ -48,6 +72,12 @@ import { mapActions } from "vuex";
 
 export default {
   name: "postDetail",
+  data() {
+    return {
+      replyColumns: null,
+      replyData: null
+    };
+  },
   components: {
     ForumHeader
   },
@@ -62,15 +92,92 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["handleHeaderPath", "handleSelected"])
+    ...mapActions(["handleHeaderPath", "handleSelected"]),
+    postTitHandle(handleType) {
+      switch (handleType) {
+        case "del":
+          alert("垃圾帖");
+          break;
+        case "print":
+          alert("打印");
+          break;
+        case "previous":
+          alert("上个帖子");
+          break;
+        case "next":
+          alert("下个帖子");
+          break;
+      }
+    }
   },
   created() {
     this.handleSelected("forum_page");
+    this.replyColumns = [
+      {
+        title: "userInfo",
+        key: "userInfo",
+        width: "183",
+        className: "geryBg",
+        render: (h, p) => {
+          return h(
+            "div",
+            {
+              style: {
+                width: "100%",
+                padding: "18px",
+                verticalAlign: "top",
+              }
+            },
+            [
+              h(
+                "h4",
+                {
+                  style: {
+                    height: "36px",
+                    lineHeight: "36px",
+                    borderBottom: "1px dotted #b9bcc1",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    fontSize: "14px",
+                    color: "#333",
+                    fontWeight: "normal",
+                    cursor: "pointer"
+                  }
+                },
+                "王老板",
+                []
+              )
+            ]
+          );
+        }
+      },
+      {
+        title: "Age",
+        key: "age"
+      }
+    ];
+    this.replyData = [
+      {
+        userInfo: "John Brown",
+        age: 18
+      }
+    ];
+  },
+  mounted() {
+    this.$nextTick(() => {
+      let tableWrap = document.getElementById("replyList");
+      let table = tableWrap.getElementsByTagName("table")[0];
+      table.style.width = "980px";
+      console.log(table)
+    });
   }
-}
+};
 </script>
 
 <style lang="less" scoped>
+.geryBg {
+  background: '#f5f5f5' !important
+}
 .crumbs {
   color: #fff;
   text-shadow: 0 -1px 0 #4b5967;
@@ -79,13 +186,16 @@ export default {
   .crumbs_inner {
     padding: 0 10px;
   }
-  a, em, .current {
+  a,
+  em,
+  .current {
     display: inline-block;
     color: #fff;
     line-height: 34px;
     vertical-align: top;
   }
-  em, .home {
+  em,
+  .home {
     background: url(../../assets/img/bg_hor.png) no-repeat -150px -312px;
     line-height: 99px;
     margin: 0 8px;
@@ -124,7 +234,7 @@ export default {
   width: 100%;
   .postConHeadL {
     display: inline-block;
-    width: 182px;
+    width: 184px;
     background: url(../../assets/img/bg_hor.png) repeat-x 0 1px;
     color: #fff;
     height: 42px;
@@ -132,14 +242,18 @@ export default {
     vertical-align: top;
     line-height: 1.4;
     padding: 3px 10px 0;
-    em { font-style: normal }
-    .postReadNum, .postReplyNum {
+    em {
+      font-style: normal;
+    }
+    .postReadNum,
+    .postReplyNum {
       float: left;
       padding-right: 10px;
       white-space: nowrap;
       overflow: hidden;
     }
-    .postReadNum em, .postReplyNum em {
+    .postReadNum em,
+    .postReplyNum em {
       display: block;
       font-family: Arial;
       font-size: 14px;
@@ -153,12 +267,12 @@ export default {
       width: 0;
       overflow: hidden;
       float: left;
-      color: #ccc
+      color: #ccc;
     }
   }
   .postConHeadR {
     display: inline-block;
-    width: 794px;
+    width: 796px;
     height: 42px;
     line-height: 42px;
     padding: 0 14px 0 10px;
@@ -170,11 +284,11 @@ export default {
       color: #fff;
       font-size: 16px;
       font-weight: normal;
-      text-shadow: 0 1px 0 rgba(0,0,0,.4);
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
       a {
         color: #fff;
         margin-left: 5px;
-        font: 12px/1.5 "\5FAE\8F6F\96C5\9ED1",Arial,HELVETICA;
+        font: 12px/1.5 "\5FAE\8F6F\96C5\9ED1", Arial, HELVETICA;
       }
     }
     .postHandle {
