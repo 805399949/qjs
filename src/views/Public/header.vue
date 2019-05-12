@@ -6,10 +6,10 @@
     <div class="nav">
       <Nav></Nav>
     </div>
-    <div class="quick-menu" v-if="alreadyLogin">
+    <div class="quick-menu" v-if="!userInfo.isLogin">
       <div class="top-bar-box">
-        <Button type="text" size="large">登录</Button>
-        <Button shape="circle" size="large">注册</Button>
+        <Button @click="handleLogin" type="text" size="large">登录</Button>
+        <Button @click="HandleRegister" shape="circle" size="large">注册</Button>
       </div>
     </div>
     <User :userName="userInfo.name" :userAvator="userInfo.avator" style="float: right" v-else/>
@@ -29,7 +29,7 @@ export default {
   },
   data() {
     return {
-      alreadyLogin: this.userInfo && this.userInfo.alreadyLogin // 在vuex中存的是否登陆属性
+      //
     };
   },
   computed: {
@@ -43,12 +43,21 @@ export default {
     }
   },
   methods: {
-  
+    handleLogin () {
+      this.$router.push({
+          name: 'login'
+      })
+    },
+    HandleRegister () {
+      console.log('注册')
+    }
   },
   created () {
-     
+     //
   },
-  mounted() {}
+  mounted() {
+    //
+  }
 };
 </script>
 

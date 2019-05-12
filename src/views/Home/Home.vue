@@ -13,6 +13,7 @@
 <script>
 import Header from "@/views/Public/header";
 import Footer from "@/views/Public/footer";
+import animate from 'animate.css';
 import { mapActions } from "vuex";
 
 export default {

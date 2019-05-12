@@ -6,6 +6,8 @@ import iView from 'iview'
 import 'iview/dist/styles/iview.css'; // 导入样式
 import config from '@/config'
 import xss from 'xss'
+import $ from 'jquery'
+
 
 if (process.env.NODE_ENV !== 'production') require('./mock')
 
@@ -18,5 +20,6 @@ Vue.prototype.$xss = xss
 new Vue({
   router,
   store,
+  $,
   render: h => h(App)
 }).$mount('#app')

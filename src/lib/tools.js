@@ -289,7 +289,7 @@ const getByteLen = function (val) {
   return len;
 }
 // 只要键盘一抬起就验证编辑框中的文字长度，最大字符长度可以根据需要设定
-export const checkLength =  (str, textareaId, showLengthId, length) => {
+export const checkLength = (str, textareaId, showLengthId, length) => {
   var maxChars = length; //最多字符数     
   var curr = maxChars - getByteLen(str);
   if (curr > 0) {
@@ -298,4 +298,68 @@ export const checkLength =  (str, textareaId, showLengthId, length) => {
     document.getElementById(showLengthId).innerHTML = '0';
     document.getElementById(textareaId).readOnly = true;
   }
+}
+
+//淡入淡出底层共用  
+export const iBase = {  
+  Id: function(name){  
+      return document.getElementById(name);  
+  },  
+  //设置元素透明度,透明度值按IE规则计,即0~100  
+  SetOpacity: function(ev, v){  
+      ev.filters ? ev.style.filter = 'alpha(opacity=' + v + ')' : ev.style.opacity = v / 100;  
+  }  
+}  
+
+// js模拟jq淡入效果
+export const fadeIn = (iBase, elem, speed, opacity) => {
+  /*
+   * 参数说明
+   * elem==>需要淡入的元素
+   * speed==>淡入速度,正整数(可选)
+   * opacity==>淡入到指定的透明度,0~100(可选)
+   */
+
+  speed = speed || 20;
+  opacity = opacity || 100;
+  //显示元素,并将元素值为0透明度(不可见)
+  elem.style.display = "block";
+  iBase.SetOpacity(elem, 0);
+  //初始化透明度变化值为0
+  var val = 0;
+  //循环将透明值以5递增,即淡入效果
+  let fn = () => {
+    iBase.SetOpacity(elem, val);
+    val += 5;
+    if (val <= opacity) {
+      setTimeout(fn(), speed);
+    }
+  };
+  fn()
+}
+
+//淡出效果(含淡出到指定透明度)  
+export const fadeOut = (iBase, elem, speed, opacity) => {
+  /*  
+   * 参数说明  
+   * elem==>需要淡入的元素  
+   * speed==>淡入速度,正整数(可选)  
+   * opacity==>淡入到指定的透明度,0~100(可选)  
+   */
+  speed = speed || 20;
+  opacity = opacity || 0;
+  //初始化透明度变化值为0  
+  var val = 100;
+  //循环将透明值以5递减,即淡出效果  
+  let fn = () => {
+    iBase.SetOpacity(elem, val);
+    val -= 5;
+    if (val >= opacity) {
+      setTimeout(fn(), speed);
+    } else if (val < 0) {
+      //元素透明度为0后隐藏元素  
+      elem.style.display = 'none';
+    }
+  };
+  fn()
 }

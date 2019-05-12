@@ -4,16 +4,22 @@
     <div class="wp" style="padding-bottom: 15px">
       <div id="pt" class="bbs_info crumbs">
         <div class="crumbs_inner" v-if="headerPath">
-          <a @click="handlePathClick('/home')" href="javascript:;" class="home" title="首页">钱交所</a>
+          <a @click="handlePathClick('/home', null)" href="javascript:;" class="home" title="首页">钱交所</a>
           <em>»</em>
           <a
-            @click="handlePathClick('/forum/forum_page')"
+            @click="handlePathClick('/forum/forum_page', null)"
             href="javascript:;"
           >{{ headerPath.firstPath }}</a>
           <em>›</em>
-          <a href="javascript:;">{{ headerPath.secondPath.secondPath }}</a>
+          <a
+            @click="handlePathClick('/forum/forum_page', headerPath.secondPath.pKey)"
+            href="javascript:;"
+          >{{ headerPath.secondPath.secondPath }}</a>
           <em>›</em>
-          <a href="javascript:;">{{ headerPath.thirdPath.thirdPath }}</a>
+          <a
+            @click="handlePathClick('/forum/forum_page', headerPath.thirdPath.cKey)"
+            href="javascript:;"
+          >{{ headerPath.thirdPath.thirdPath }}</a>
         </div>
       </div>
       <div class="postListContent wp">
@@ -27,29 +33,14 @@
 
           <div class="forum_info">
             <a href="javascript:;" class="icon">
-              <img src="../../assets/img/logo.png" height="72" width="72" :alt="headerPath.thirdPath.thirdPath">
+              <img
+                src="../../assets/img/logo.png"
+                height="72"
+                width="72"
+                :alt="headerPath.thirdPath.thirdPath"
+              >
             </a>
 
-            <div class="forum_funs clearfix">
-              <ul>
-                <li>
-                  <a href="javascript:;" id="a_favorite">
-                    <i class="fav"></i>收藏本版
-                    <em id="number_favorite">
-                      (<b id="number_favorite_num">{{ subareaInfo && subareaInfo.followers ? subareaInfo.followers : 0 }}</b>)
-                    </em>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="javascript:;"
-                    title="RSS"
-                  >
-                    <i class="rss"></i>订阅本版
-                  </a>
-                </li>
-              </ul>
-            </div>
             <div class="forum_props">
               <div class="count">
                 <span>今日回帖:</span>
@@ -59,7 +50,9 @@
                 <span>全部回帖:</span>
                 <em>{{ subareaInfo && subareaInfo.allReply ? subareaInfo.allReply : 0 }}</em>
               </div>
-              <div class="desc">{{ subareaInfo && subareaInfo.subareaDes ? subareaInfo.subareaDes : '暂无介绍' }}</div>
+              <div
+                class="desc"
+              >{{ subareaInfo && subareaInfo.subareaDes ? subareaInfo.subareaDes : '暂无介绍' }}</div>
             </div>
           </div>
           <div class="forum_rules" style>
@@ -70,7 +63,10 @@
               <i class="f_l"></i>
               <i class="f_r"></i>
             </div>
-            <div class="inner" v-html="subareaInfo && subareaInfo.subareaNotice ? subareaInfo.subareaNotice : '暂无介绍'"></div>
+            <div
+              class="inner"
+              v-html="subareaInfo && subareaInfo.subareaNotice ? subareaInfo.subareaNotice : '暂无介绍'"
+            ></div>
           </div>
         </div>
         <div class="pgt1" style="overflow: hidden; margin-bottom: 10px">
@@ -98,8 +94,13 @@
           </a-->
         </div>
         <div class="categoryDesCon cl">
-          <div class="th">
-            <Select :model.sync="postSubjectType" size="small" style="width:80px" placeholder="全部主题">
+          <!-- <div class="th">
+            <Select
+              :model.sync="postSubjectType"
+              size="small"
+              style="width:80px"
+              placeholder="全部主题"
+            >
               <Option
                 v-for="item in postConTypeList"
                 :value="item.value"
@@ -114,7 +115,7 @@
             <Tag color="#576979">精华</Tag>
             <span class="pipe">|</span>
             <Tag color="#576979">更多</Tag>
-          </div>
+          </div> -->
           <div class="postList">
             <Table
               class="globalTopPost"
@@ -189,7 +190,7 @@
           </div>
           <Editor-bar :isClear="isClear" @change="change">
             <div slot="fastPostingTitle">
-              <Select
+              <!-- <Select
                 v-model="fastPostingType"
                 style="width:150px; margin: 0px 10px 10px 0px"
                 placement="top-start"
@@ -200,11 +201,11 @@
                   :value="item.value"
                   :key="item.value"
                 >{{ item.label }}</Option>
-              </Select>
+              </Select> -->
               <Input
                 id="postTitInput"
                 v-model="fastPostingTitle"
-                placeholder="最多输入120个字符"
+                placeholder="请填写标题(最多输入120个字符)"
                 @keyup.native="handlePostTitInput()"
                 clearable
                 style="width: 350px; margin: 0px 10px 10px 0px"
@@ -229,17 +230,17 @@
 </template>
 
 <script>
-import ForumHeader from "@/components/forumHeader"
-import { setToken, getToken } from "@/lib/util"
+import ForumHeader from "@/components/forumHeader";
+import { setToken, getToken } from "@/lib/util";
 import {
   getRelativeTime,
   isMillisecond,
   getDate,
   checkLength
-} from "@/lib/tools"
-import { getPostList } from "@/api/forum"
-import EditorBar from "@/components/editor"
-import { mapActions } from "vuex"
+} from "@/lib/tools";
+import { getPostList } from "@/api/forum";
+import EditorBar from "@/components/editor";
+import { mapActions } from "vuex";
 
 export default {
   name: "postList",
@@ -257,8 +258,8 @@ export default {
       isClear: false, // 清空发帖框内容
       postConTypeList: [
         {
-          value: "allType",
-          label: "全部主题"
+          value: "transaction",
+          label: "交易贴"
         },
         {
           value: "votePost",
@@ -268,7 +269,7 @@ export default {
       postTotalNum: null, // 帖子总数 (用于分页)
       // 帖子列表
       postList: {
-        columns: [],  // 表格每一列的渲染规则
+        columns: [], // 表格每一列的渲染规则
         data: [], // 列表数据
         globalTopData: [], // 从列表数据中分离出的全局置顶帖
         localTopData: [] // 从列表数据中分离出的局部置顶帖
@@ -285,7 +286,7 @@ export default {
       // 当前页面层级
       let headerPath = JSON.parse(window.localStorage.getItem("headerPath"));
       if (this.$store.state.headerPath === 0 && headerPath) {
-        this.$store.commit("setHeaderPath", headerPath); //同步操作
+        this.$store.commit("setHeaderPath", headerPath); //刷新页面后的同步操作
       }
       return this.$store.state.headerPath;
     }
@@ -296,17 +297,18 @@ export default {
       console.log(1);
     },
     // 点击头部路径 进行跳转
-    handlePathClick(path) {
-      console.log(this.headerPath);
+    handlePathClick(path, selectId) {
       if (path === "/home") {
         this.handleSelected("home");
         this.$router.push({
           path
-        })
+        });
       } else {
+        var selectId = selectId;
+        localStorage.setItem("toId", selectId);
         this.$router.push({
           path
-        })
+        });
       }
     },
     getDateTimeStamp(dateStr) {
@@ -318,7 +320,12 @@ export default {
     },
     handlePostTitInput() {
       console.log(123123);
-      checkLength(this.fastPostingTitle, "postTitInput", "checklen", this.titMaxLen);
+      checkLength(
+        this.fastPostingTitle,
+        "postTitInput",
+        "checklen",
+        this.titMaxLen
+      );
     },
     fastPosting() {
       this.sendPostLoading = !this.sendPostLoading;
@@ -326,13 +333,14 @@ export default {
   },
   created() {
     this.handleSelected("forum_page");
+    console.log(this.headerPath.secondPath.pKey);
     // 获取页面数据
     getPostList(getToken(), {
       type: this.headerPath.secondPath.secondPath,
       name: this.headerPath.thirdPath.thirdPath
     })
       .then(res => {
-        this.subareaInfo = res.data.currentSubareaInfo
+        this.subareaInfo = res.data.currentSubareaInfo;
 
         // this.postList.data = res.data.postList;
         // 分离全局置顶数据 (测试阶段 暂时截取4条)
@@ -376,42 +384,34 @@ export default {
               if (params.row.postTopType !== 2) {
                 iconType = "md-arrow-round-up";
                 if (params.row.postTopType === 0) {
+                  iconType = "rocket";
                   iconTypeDes = "全站置顶帖";
-                  iconColor = "#ffad00";
-                  iconBorder = "2px solid #ffad00";
                 } else {
+                  iconType = "Balloon";
                   iconTypeDes = "本版置顶帖";
-                  iconColor = "#96cb33";
-                  iconBorder = "2px solid #96cb33";
                 }
               } else {
                 if (params.row.postConType === 0) {
-                  iconType = "ios-hand";
+                  // iconType = "ios-hand";
+                  iconType = "post_from_all";
                   iconTypeDes = "投票贴";
-                  iconColor = "#ff4f5b";
-                  iconBorder = "0";
                 } else if (params.row.postConType === 1) {
-                  iconType = "md-list-box";
+                  iconType = "post_from_all";
                   iconTypeDes = "主题帖";
-                  iconColor = "#89949b";
-                  iconBorder = "0";
                 }
               }
-              return h("Icon", {
+              return h("img", {
                 style: {
-                  cursor: "pointer",
-                  fontSize: "20px",
-                  borderRadius: params.row.postTopType !== 2 ? "12px" : "0",
-                  border: iconBorder
+                  display: 'block',
+                  width: '20px',
+                  height: '20px'
                 },
-                props: {
-                  // type: params.row.postType === 0 ? "md-list-box" : "ios-podium"
-                  type: iconType,
-                  color: iconColor
+                attrs: {
+                  src: require('../../assets/img/'+ iconType + '.png')
                 },
-                domProps: {
-                  title: iconTypeDes
-                },
+                // domProps: {
+                //   title: iconTypeDes
+                // },
                 on: {
                   click: () => {}
                 }
@@ -600,21 +600,20 @@ export default {
   },
   mounted() {
     // 微调iview部分样式
-    let _this = this;
-    let th = document.getElementsByClassName("th")[0];
-    let thSelect = th.getElementsByClassName("ivu-select-selection")[0];
-    let thSelectText = th.getElementsByClassName("ivu-select-placeholder")[0];
-    let thSelectIcon = th.getElementsByClassName("ivu-icon")[0];
-    thSelect.style.cssText = "background-color:#576979; border:0; height:32px";
-    thSelectText.style.cssText = "height: 32px; line-height: 32px; color: #fff";
-    thSelectIcon.style.color = "#fff";
+    // let th = document.getElementsByClassName("th")[0];
+    // let thSelect = th.getElementsByClassName("ivu-select-selection")[0];
+    // let thSelectText = th.getElementsByClassName("ivu-select-placeholder")[0];
+    // let thSelectIcon = th.getElementsByClassName("ivu-icon")[0];
+    // thSelect.style.cssText = "background-color:#576979; border:0; height:32px";
+    // thSelectText.style.cssText = "height: 32px; line-height: 32px; color: #fff";
+    // thSelectIcon.style.color = "#fff";
     //=================================================================================
   }
 };
 </script>
 
 <style lang="less" scoped>
-@import url('./postList');
+@import url("./postList");
 </style>
 
 

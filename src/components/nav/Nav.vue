@@ -85,7 +85,7 @@ export default {
   },
   computed: {
     selected () {
-      console.log(this.$store.state.menu.selected)
+      // console.log(this.$store.state.menu.selected)
       return this.$store.state.menu.selected
     }
   },

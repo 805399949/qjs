@@ -11,28 +11,24 @@
           <a href="javascript:;">
             <Dropdown>
               <Icon type="md-reorder" class="subject" size="28"/>
-              <a href="javascript:void(0)">主题</a>
-              <DropdownMenu slot="list">
-                <DropdownItem>主题1</DropdownItem>
-                <DropdownItem>主题2</DropdownItem>
-              </DropdownMenu>
+              <a href="javascript:void(0)">我的主题</a>
             </Dropdown>
           </a>
         </div>
         <div class="oUserLink">
           <a href="javascript:void(0)">
-            <Icon type="ios-undo-outline" class="reply" size="28"/>回复
+            <Icon type="ios-undo-outline" class="reply" size="28"/>我的回复
           </a>
         </div>
         <div class="oUserLink">
           <a href="javascript:void(0)">
-            <Icon type="ios-star-outline" class="fav" size="28"/>收藏
+            <Icon type="ios-star-outline" class="fav" size="28"/>我的收藏
           </a>
         </div>
         <!--<li><a href="home.php?mod=space&amp;do=friend"><i class="friend"><b></b></i>好友</a></li>-->
         <div class="oUserLink">
           <a href="javascript:void(0)">
-            <Icon type="ios-chatbubbles-outline" class="newscommon" size="28"/>评论
+            <Icon type="ios-chatbubbles-outline" class="newscommon" size="28"/>我的评论
           </a>
         </div>
         <!--<li><a href="plugin.php?id=trends&amp;square=square"><i class="doing"><b></b></i>动态</a></li>-->
@@ -43,18 +39,6 @@
             </i>书签
           </a>
         </li>-->
-      </div>
-      <div class="links">
-        <!-- <li><a href="userapp.php">社区应用</a></li> -->
-        <div class="oUserLink">
-          <a href="javascript:void(0)">最新热门</a>
-        </div>
-        <div class="oUserLink">
-          <a href="javascript:void(0)">精华区</a>
-        </div>
-        <!-- <li><a href="#">社区服务</a></li>
-            <li><a href="#">会员列表</a></li>
-        <li><a href="#">统计排行</a></li>-->
       </div>
     </div>
   </div>

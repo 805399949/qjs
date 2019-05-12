@@ -15,7 +15,8 @@ const state = {
   userInfo: getUserInfoCookie(),
   token: getToken(),
   access: '',
-  hasGetInfo: false
+  hasGetInfo: false,
+  isLogin: false
 }
 
 const mutations = {

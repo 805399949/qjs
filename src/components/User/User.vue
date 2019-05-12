@@ -36,7 +36,7 @@ export default {
         case "logout":
             this.handleLogOut().then(() => {
               this.$router.push({
-                name: 'login'
+                name: 'home'
               })
             })
           break;

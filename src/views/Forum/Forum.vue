@@ -21,7 +21,7 @@
       <div id="ct" class="wp cl re_ct">
         <div class="mn">
           <div class="fl bm">
-            <div class="bm bmw cl" v-if='postSubareaList' v-for="item in postSubareaList">
+            <div :id="item.parentKey" class="bm bmw cl" v-if='postSubareaList' v-for="(item, index1) in postSubareaList">
               <div class="bm_h cl">
                 <span class="y">
                   分区版主:
@@ -34,8 +34,8 @@
               <div class="bm_c" style>
                 <table cellspacing="0" cellpadding="0" class="fl_tb">
                   <tbody>
-                    <template v-for='childItem in item.childList'>
-                      <tr class="fl_row">
+                    <template v-for='(childItem, index2) in item.childList'>
+                      <tr :id="childItem.childKey" class="fl_row">
                         <td class="fl_icn" style="width: 72px;">
                           <a
                             href="javascript:;"
@@ -119,6 +119,7 @@ import ForumHeader from '@/components/forumHeader'
 import { getForumTitInfo, getPostSubareaList } from "@/api/forum";
 import { setToken, getToken } from '@/lib/util'
 import { mapActions } from 'vuex'
+import { setTimeout } from 'timers';
 
 export default {
   name: "qjsForum",
@@ -136,14 +137,8 @@ export default {
       'handleHeaderPath',
       "handleSelected"
     ]),
+    //去子页面
     toChildPostList (pKey, cKey, secondPath, thirdPath) {
-      this.$router.push({
-        name: 'postList_page',
-        params: {
-          pKey,
-          cKey
-        }
-      })
       this.handleHeaderPath({
         firstPath: '论坛',
         secondPath: {
@@ -155,20 +150,58 @@ export default {
           thirdPath
         }
       })
+      this.$router.push({
+        name: 'postList_page',
+        params: {
+          pKey,
+          cKey         
+        }
+      })
+    },
+    // 请求渲染数据
+    getPageRenderData () {
+      getForumTitInfo(getToken()).then(res => {
+        this.titInfo = res.data.titInfo      
+      }).catch(err => {
+        console.log(err)
+      })
+      getPostSubareaList(getToken()).then(res => {
+        this.postSubareaList = res.data.subList
+        this.$nextTick(() => {
+
+          this.getlocal()
+          // console.log($("#detrmb"))
+
+        })//创建时执行跳转锚点位置
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    //从本地找到id
+    getlocal(){
+        //找到锚点id
+        let selectId = localStorage.getItem("toId");
+        let toElement = document.getElementById(selectId);
+        //如果对应id存在，就跳转
+        if(selectId){
+          // console.log(selectId,$('#' + selectId))
+            toElement.scrollIntoView()
+        }
     }
   },
   created () {
-    this.handleSelected("forum_page")
-    getForumTitInfo(getToken()).then(res => {
-      this.titInfo = res.data.titInfo      
-    }).catch(err => {
-      console.log(err)
-    })
-    getPostSubareaList(getToken()).then(res => {
-      this.postSubareaList = res.data.subList
-    }).catch(err => {
-      console.log(err)
-    })
+    this.handleSelected("forum_page") // 记录当前选择的menu是论坛页
+
+    this.getPageRenderData() // 获取渲染页面的数据
+    
+  },
+  mounted () {
+    
+    
+  },
+  //离开页面进行对localStorage  id销毁，避免其他入口进来有锚点问题
+  destroyed(){
+    localStorage.setItem("toId",'')
   }
 };
 </script>

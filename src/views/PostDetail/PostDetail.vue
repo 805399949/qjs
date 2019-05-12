@@ -52,15 +52,7 @@
             </div>
           </div>
         </div>
-        <Table
-          id="replyList"
-          v-if="replyColumns && replyData"
-          style="border: 0"
-          :columns="replyColumns"
-          :data="replyData"
-          :show-header="false"
-          disabled-hover
-        ></Table>
+        <ReplyTable></ReplyTable>
       </div>
     </div>
   </div>
@@ -69,17 +61,18 @@
 <script>
 import ForumHeader from "@/components/forumHeader";
 import { mapActions } from "vuex";
+import ReplyTable from "@/components/replyList/replyList"
 
 export default {
   name: "postDetail",
   data() {
     return {
-      replyColumns: null,
-      replyData: null
-    };
+      
+    }
   },
   components: {
-    ForumHeader
+    ForumHeader,
+    ReplyTable
   },
   computed: {
     headerPath() {
@@ -96,88 +89,31 @@ export default {
     postTitHandle(handleType) {
       switch (handleType) {
         case "del":
-          alert("垃圾帖");
+          alert("垃圾帖")
           break;
         case "print":
-          alert("打印");
+          alert("打印")
           break;
         case "previous":
-          alert("上个帖子");
+          alert("上个帖子")
           break;
         case "next":
-          alert("下个帖子");
+          alert("下个帖子")
           break;
       }
     }
   },
   created() {
-    this.handleSelected("forum_page");
-    this.replyColumns = [
-      {
-        title: "userInfo",
-        key: "userInfo",
-        width: "183",
-        className: "geryBg",
-        render: (h, p) => {
-          return h(
-            "div",
-            {
-              style: {
-                width: "100%",
-                padding: "18px",
-                verticalAlign: "top",
-              }
-            },
-            [
-              h(
-                "h4",
-                {
-                  style: {
-                    height: "36px",
-                    lineHeight: "36px",
-                    borderBottom: "1px dotted #b9bcc1",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    fontSize: "14px",
-                    color: "#333",
-                    fontWeight: "normal",
-                    cursor: "pointer"
-                  }
-                },
-                "王老板",
-                []
-              )
-            ]
-          );
-        }
-      },
-      {
-        title: "Age",
-        key: "age"
-      }
-    ];
-    this.replyData = [
-      {
-        userInfo: "John Brown",
-        age: 18
-      }
-    ];
+    this.handleSelected("forum_page")
   },
   mounted() {
-    this.$nextTick(() => {
-      let tableWrap = document.getElementById("replyList");
-      let table = tableWrap.getElementsByTagName("table")[0];
-      table.style.width = "980px";
-      console.log(table)
-    });
+    
   }
-};
+}
 </script>
 
 <style lang="less" scoped>
-.geryBg {
-  background: '#f5f5f5' !important
-}
+
 .crumbs {
   color: #fff;
   text-shadow: 0 -1px 0 #4b5967;
