@@ -23,7 +23,7 @@
         <p class="tit dec">我们将为您提供最新，最有价值的信息</p> 
       </div>
       <div class="news-content clearfix" ref="newsList">
-        <div class="news-item" v-for="(item, index) in newsList" :key="index" ref="newsItem">
+        <div class="news-item" v-for="(item, index) in waterFallList" :key="index" ref="newsItem">
           <newsBox 
             :imgUrl="item.img"
             :title="item.title"
@@ -57,7 +57,7 @@ export default {
   },
   computed: {
     ...mapState({
-      newsList: state => state.news.newsList,
+      waterFallList: state => state.news.waterFallList,
     }),
   },
   methods: {
@@ -81,21 +81,22 @@ export default {
                 minIndex = boxHeight.indexOf(minH);
             itemRef[i].style.cssText = `position:absolute;top:${minH}px;left:${minIndex * (itemRefWidth + 32)}px;`;
             boxHeight[minIndex] += itemRef[i].offsetHeight;
+            console.log(boxHeight);
           }
         }
         listRef.style.height = Math.max.apply(null, boxHeight) + 'px';
       }
     },
   },
+  async beforeRouteEnter(to, from, next) {
+    await store.dispatch('getWaterFallNewsList', {page: 0, number: 8});
+    next();
+  },
   created() {
-    store.dispatch('getNewsList', {page: 0, number: 8}).then(data => {
-      if (data.status === 200) {
-        this.$nextTick(() => {
-          setTimeout(() => {
-            this.waterFall();
-          }, 0) 
-        });
-      }
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.waterFall();
+      }, 0) 
     });
   },
 };

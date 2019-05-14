@@ -1,7 +1,7 @@
 import Mock from 'mockjs';
 
-// 新闻列表
-Mock.mock(/news\/list/, {
+// 首页瀑布流新闻列表
+Mock.mock(/news\/list\/waterfall/, {
   status: 200,
   message: 'OK',
   data: [
@@ -89,5 +89,40 @@ Mock.mock(/news\/list/, {
       author: '作者2',
       created: 1552432879333,
     },
+  ],
+});
+
+// 新闻列表
+Mock.mock(/news\/list/, {
+  status: 200,
+  message: 'OK',
+  data: [
+    {
+      link: 'link1',
+      title: '苹果取消Mac升级和维修时收的数据迁移费1',
+      des: '自动同步工具和云备份早已取代手动数据迁移了。1',
+      createDate: '1分钟前',
+      comment: 10,
+      read: 20,
+      img: 'http://img1.feng.com/1/h062/h40/c453737cimg201904101709340_214__142.jpg',
+    },
+    {
+      link: 'link2',
+      title: '苹果取消Mac升级和维修时收的数据迁移费2',
+      des: '自动同步工具和云备份早已取代手动数据迁移了。2',
+      createDate: '2分钟前',
+      comment: 10,
+      read: 20,
+      img: 'http://img1.feng.com/1/h062/h40/c453737cimg201904101709340_214__142.jpg',
+    },
+    {
+      link: 'link3',
+      title: '苹果取消Mac升级和维修时收的数据迁移费3',
+      des: '自动同步工具和云备份早已取代手动数据迁移了。3',
+      createDate: '3分钟前',
+      comment: 10,
+      read: 20,
+      img: 'http://img1.feng.com/1/h062/h40/c453737cimg201904101709340_214__142.jpg',
+    }
   ],
 });

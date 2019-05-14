@@ -11,3 +11,11 @@ export const getNewsListApi = (options) => {
     method: 'get'
   })
 }
+
+export const getWaterFallNewsListApi = (options) => {
+  return axios.request({
+    url: api.newsList + '/waterfall',
+    params: options,
+    method: 'get'
+  })
+}

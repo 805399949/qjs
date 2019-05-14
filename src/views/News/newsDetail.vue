@@ -40,22 +40,7 @@
           </div>
         </div>
         <div class="news-right">
-          <div class="today-news">
-            <h2>今日<em>头条</em></h2>
-          </div>
-          <div class="hot-attention-news">
-            <h2 class="title">热门<em>关注</em></h2>
-            <ul>
-              <li><span class="hot-attention-sortnum">1</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-04/Apple-HomePod-prices-worldwide-legal-channels-straight-down-500-yuan_701174.shtml" title="苹果HomePod全球范围降价 国行直降500元">苹果HomePod全球范围降价 国行直降500元</a></p></li>
-              <li><span class="hot-attention-sortnum">2</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-04/Apple-stuck-again-embarrassed-Intel-chips-or-5-g-can-t-deliver-on-time_701172.shtml" title="苹果再陷尴尬 英特尔5G芯片或无法按时交货 ">苹果再陷尴尬 英特尔5G芯片或无法按时交货 </a></p></li>
-              <li><span class="hot-attention-sortnum">3</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-05/IOS-12.1.4-validation-is-now-closing-you-haven-t-rise-to-12.2_701176.shtml" title="iOS 12.1.4验证现已关闭 你还没升到12.2吗？">iOS 12.1.4验证现已关闭 你还没升到12.2吗？</a></p></li>
-              <li><span class="hot-attention-sortnum">4</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-09/Huawei-is-interested-in-foreign-sales-of-5-g-chips-but-only-sell-to-apple_701191.shtml" title="华为有兴趣对外销售5G芯片 但只卖给苹果">华为有兴趣对外销售5G芯片 但只卖给苹果</a></p></li>
-              <li><span class="hot-attention-sortnum">5</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-09/2019-iPhone-broke-again-or-send-five-new-handsets-this-year_701195.shtml" title="2019 iPhone爆料又来了 今年或发五款新机？">2019 iPhone爆料又来了 今年或发五款新机？</a></p></li>
-              <li><span class="hot-attention-sortnum">6</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-08/The-second-generation-AirPods-and-Beats-Powerbeats-Pro-you-which-to-choose_701187.shtml" title="二代AirPods和Beats Powerbeats Pro 你该选哪个？">二代AirPods和Beats Powerbeats Pro 你该选哪个？</a></p></li>
-              <li><span class="hot-attention-sortnum">7</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-04/Beats-release-true-wireless-headset-H1-chip-support-Hey-Siri_701170.shtml" title="Beats发布真无线耳机：H1芯片 支持Hey Siri">Beats发布真无线耳机：H1芯片 支持Hey Siri</a></p></li>
-              <li><span class="hot-attention-sortnum">8</span><p class="hot-attention-title"><a href="https://www.feng.com/iPhone/news/2019-04-06/Apple-Card-to-five-years-for-Apple-among-the-ten-big-Card-issuers_701178.shtml" title="Apple Card有望5年后让苹果跻身十大发卡方">Apple Card有望5年后让苹果跻身十大发卡方</a></p></li>
-            </ul>
-          </div>
+          <rightHotNews></rightHotNews>
         </div>
       </div>
     </div>
@@ -64,8 +49,13 @@
 
 <script>
 import { mapActions } from "vuex";
+import rightHotNews from '_c/news/rightHotNews';
+
 export default {
   name: 'NewsDetail',
+  components: {
+    rightHotNews,
+  },
   data() {
     return {
       relatedArticles: [
@@ -209,60 +199,6 @@ export default {
       .news-right {
         float: right;
         width: 385px;
-
-        .today-news {
-          h2 {
-            font-size: 20px;
-            border-left: 5px solid #000;
-            line-height: 25px;
-            padding-left: 10px;
-            margin: 26px 0px 10px 0;
-            height: 25px;
-            em {
-              color: #ed0000;
-            }
-          }
-        }
-        .hot-attention-news {
-          border: 1px solid #ededed;
-          border-top: 3px solid #000;
-          margin-bottom: 20px;
-          width: 100%;
-          overflow: hidden;
-          background-color: #ffffff;
-          .title {
-            font-size: 20px;
-            width: 100%;
-            height: 50px;
-            background-color: #f6f6f6;
-            line-height: 50px;
-            text-align: center;
-            em {
-              color: #ed0000;
-            }
-          }
-          ul {
-            li {
-              margin: 20px;
-              height: 50px;
-              .hot-attention-sortnum {
-                float: left;
-                font-family: Arial;
-                width: 12%;
-                font-size: 22px;
-                color: #b4b4b4;
-              }
-              .hot-attention-title {
-                float: left;
-                font-size: 14px;
-                line-height: 25px;
-                height: 50px;
-                width: 88%;
-                border-bottom: 1px dotted #ededed;
-              }
-            }
-          }
-        }
       }
     }
   }
