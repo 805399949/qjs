@@ -71,7 +71,8 @@ body {
 }
 img {
 	border:0;
-	max-width:100%;
+  max-width:100%;
+  vertical-align: top
 }
 ol,ul {
 	list-style:none;

@@ -14,9 +14,9 @@ import {
 const state = {
   userInfo: getUserInfoCookie(),
   token: getToken(),
-  access: '',
-  hasGetInfo: false,
-  isLogin: false
+  // access: '',
+  // hasGetInfo: false,
+  // isLogin: false
 }
 
 const mutations = {
@@ -59,7 +59,7 @@ const actions = {
       // })
       // 如果你的退出登录无需请求接口，则可以直接使用下面三行代码而无需使用logout调用接口
       commit('setToken', '')
-      commit('setUserInfo', {})
+      commit('setUserInfo', 'false')
       resolve()
     })
   },

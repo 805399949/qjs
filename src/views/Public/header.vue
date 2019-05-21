@@ -34,7 +34,8 @@ export default {
   },
   computed: {
     userInfo() {
-      if (Object.keys(this.$store.state.user.userInfo).length === 0) return {}
+      // Object.keys(this.$store.state.user.userInfo).length === 0
+      if (this.$store.state.user.userInfo === 'false') return {}
       else {
         return typeof this.$store.state.user.userInfo === "object"
           ? this.$store.state.user.userInfo

@@ -3,8 +3,8 @@
     <div class="wrap quick_services">
       <div class="user_links">
         <div class="my oUserLink">
-          <a href="javascript:void(0)">
-            <Icon class="user" size="28" type="ios-contact-outline"/>我的威锋
+          <a href="javascript:void(0)" @click="myQjs">
+            <Icon class="user" size="28" type="ios-contact-outline"/>我的钱交所
           </a>
         </div>
         <div class="oUserLink">
@@ -43,6 +43,33 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'ForumHeader',
+  data () {
+    return {
+      //
+    }
+  },
+  methods: {
+    myQjs () {
+      // console.log(this.$store.state.user.userInfo)
+      // 点击我的钱交所 
+      this.$store.state.user.userInfo !== 'false'
+      ? this.$router.push({
+        name: 'personalCenter_page'
+      })
+      : this.$Message.error({
+        content: '您尚未登陆,请先登陆',
+        duration: 4,
+        closable: true
+      });
+    }
+  }
+}
+</script>
+
 
 <style scoped lang="less">
 /* 

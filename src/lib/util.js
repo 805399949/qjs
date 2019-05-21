@@ -29,8 +29,9 @@ export const getToken = () => {
 
 export const getUserInfoCookie = () => {
   const userInfo = Cookies.get('userInfo')
-  if (userInfo) return userInfo
-  else return false
+  console.log(userInfo)
+  if (userInfo && userInfo !== 'false') return userInfo
+  else return 'false'
 }
 
 export const hasChild = (item) => {
