@@ -1,203 +1,129 @@
+<style lang="less" scoped>
+@import url("./personalCenter.less");
+</style>
+
 <template>
-  <div>
-    <div class="personalWrap">
-      <div class="user_avatar">
-        <div class="avatar_wrap">
-          <img :src="userInfo.avator" alt="加载失败,请刷新" title="点击更换头像">
-        </div>
+  <div id="profile" style="padding: 0">
+    <div class="profile_heading">
+      <div class="p_h_container">
+        <Row>
+          <Col :xs="6" :sm="6" :md="4" style="padding: 0 15px">
+            <div
+              class="profile__heading--avatar-warp"
+              @mouseenter="enterAvatar"
+              @mouseleave="leaveAvatar"
+            >
+              <a href="javascript:;">
+                <img class="profile__heading--avatar avatar-160" :src="avatarSrc" alt="胡八一" />
+              </a>
+              <input
+                ref="avatarFile"
+                type="file"
+                id="avatarFile"
+                name="avatar"
+                @change="getFile"
+                class="file hide"
+                accept="image/jpeg, image/jpg, image/png"
+              />
+              <div
+                @click="choiceImg"
+                :class="{'profile__avatar-uploader': true, 'hide': !changeAvatar, 'show': changeAvatar }"
+              >
+                <span>上传头像</span>
+              </div>
+            </div>
+            <div class="profile__heading--social">
+              <ul class="sn-inline profile__heading--social-item">
+                <li>
+                  <a class="opacity25 icon-sn-github" target="_blank" href="javascript:;"></a>
+                </li>
+                <li>
+                  <a class="opacity25 icon-sn-weibo" target="_blank" href="javascript:;"></a>
+                </li>
+                <li>
+                  <a class="opacity25 icon-sn-linkedin" target="_blank" href="javascript:;"></a>
+                </li>
+                <li>
+                  <a class="opacity25 icon-sn-twitter" target="_blank" href="javascript:;"></a>
+                </li>
+                <li>
+                  <a class="opacity25 icon-sn-facebook" target="_blank" href="javascript:;"></a>
+                </li>
+              </ul>
+            </div>
+          </Col>
+          <Col :md="10" :sm="18" :xs="18" style="padding: 0 15px">
+            <h2 class="profile__heading--name" style="font-size: 30px">
+              胡八一
+              <small class="ml15">
+                <a href="/u/hubayi/about">查看完整档案</a>
+              </small>
+            </h2>
+            <div class="profile__heading--award">
+              <a class="profile__rank-btn" href="/u/hubayi/rank">
+                <img src="https://cdn.segmentfault.com/v-5cc2cd8e/global/img/rp.svg" />
+                <span class="h4">8</span>
+                <span class="profile__rank-btn-text">声望</span>
+              </a>
+            </div>
+            <div class="profile__heading--other">
+              <span class="profile__heading--other-item">
+                <Icon type="ios-pin" />
+                <span class="profile__city">
+                  北京
+                  <span class="profile__heading-edit btn btn-xs" data-type="city">
+                    <Icon type="ios-create" />编辑
+                  </span>
+                </span>
+              </span>
+              <span class="profile__heading--other-item">
+                <Icon type="ios-school" />
+                <span class="profile__school">
+                  <span class="profile__heading--other-item-fgx hide">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                  <span
+                    class="profile__heading-edit btn btn-xs profile__heading-edit--init"
+                    data-type="school"
+                  >
+                    <i class="fa fa-pencil hide" aria-hidden="true"></i>填写毕业院校
+                  </span>
+                </span>
+              </span>
+              <span class="profile__heading--other-item">
+                <Icon type="ios-briefcase" />
+                <span class="profile__company">
+                  北京软控伟业科技有限公司
+                  <span
+                    class="profile__heading--other-item-fgx"
+                  >&nbsp;&nbsp;|&nbsp;&nbsp;</span>助理
+                  <span class="profile__heading-edit btn btn-xs" data-type="company">
+                    <Icon type="ios-create" />编辑
+                  </span>
+                </span>
+              </span>
+            </div>
+          </Col>
+          <Col :md="10" :sm="24" :xs="24" class="profile__heading--desc" style="padding: 0 15px">
+            <div class="profile__heading--desc-heading">
+              <span class="profile__heading--desc-heading-dot-warp">
+                <span class="profile__heading-dot profile__heading-dot--red"></span>
+                <span class="profile__heading-dot profile__heading-dot--yellow"></span>
+                <span class="profile__heading-dot profile__heading-dot--green"></span>
+              </span>
+              <div class="pull-right" style="float: right">
+                <span
+                  data-type="desc"
+                  class="profile__heading-edit btn btn-xs profile__heading--desc-heading-edit"
+                >
+                  <Icon type="md-create" />编辑
+                </span>
+              </div>
+            </div>
+          </Col>
+        </Row>
       </div>
-      <Form
-        v-if="userInfoItem"
-        id="personalForm"
-        :model="userInfoItem"
-        :label-width="100"
-        style="padding-left: 50px"
-      >
-        <FormItem label="姓名：">
-          <Input
-            v-model="userInfoItem.name"
-            style="width: 200px"
-            readonly
-            placeholder="Enter something..."
-          />
-        </FormItem>
-        <FormItem label="身份证号：">
-          <Input
-            v-model="userInfoItem.IDCard"
-            style="width: 200px"
-            readonly
-            placeholder="Enter something..."
-          />
-        </FormItem>
-        <FormItem label="认证手机号：">
-          <Input
-            v-model="userInfoItem.userPhone"
-            style="width: 200px"
-            readonly
-            placeholder="Enter something..."
-          />
-        </FormItem>
-        <FormItem label="昵称：">
-          <Input
-            v-model="userInfoItem.nickname"
-            style="width: 200px"
-            readonly
-            placeholder="Enter something..."
-          />
-        </FormItem>
-        <FormItem label="认证邮箱：">
-          <Input
-            v-model="userInfoItem.userMail"
-            style="width: 200px"
-            readonly
-            placeholder="Enter something..."
-          />
-        </FormItem>
-        <FormItem label="地址1：">
-          <Input
-            v-model="userInfoItem.addres.addres1"
-            style="width: 200px"
-            readonly
-            placeholder="Enter something..."
-          />
-        </FormItem>
-        <FormItem label="地址2：">
-          <Input
-            v-model="userInfoItem.addres.addres2"
-            style="width: 200px"
-            readonly
-            placeholder="Enter something..."
-          />
-        </FormItem>
-        <Row>
-          <Col span="6">
-            <FormItem label="银行卡1：">
-              <Input
-                v-model="userInfoItem.bankCard.bankCard1.num"
-                readonly
-                placeholder="Enter something..."
-              />
-            </FormItem>
-          </Col>
-          <Col span="10">
-            <FormItem label="开户行：">
-              <Input
-                v-model="userInfoItem.bankCard.bankCard1.addres"
-                readonly
-                placeholder="Enter something..."
-              />
-            </FormItem>
-          </Col>
-          <Col span="6">
-            <FormItem label="持卡人">
-              <Input
-                v-model="userInfoItem.bankCard.bankCard1.name"
-                readonly
-                placeholder="Enter something..."
-              />
-            </FormItem>
-          </Col>
-        </Row>
-        <Row>
-          <Col span="6">
-            <FormItem label="银行卡2：">
-              <Input
-                v-model="userInfoItem.bankCard.bankCard2.num"
-                readonly
-                placeholder="Enter something..."
-              />
-            </FormItem>
-          </Col>
-          <Col span="10">
-            <FormItem label="开户行：">
-              <Input
-                v-model="userInfoItem.bankCard.bankCard2.addres"
-                readonly
-                placeholder="Enter something..."
-              />
-            </FormItem>
-          </Col>
-          <Col span="6">
-            <FormItem label="持卡人">
-              <Input
-                v-model="userInfoItem.bankCard.bankCard2.name"
-                readonly
-                placeholder="Enter something..."
-              />
-            </FormItem>
-          </Col>
-        </Row>
-      </Form>
-      <Row style="padding: 0 25px" :gutter="16">
-        <Col class="myPosts" span="12">
-          <Card style>
-            <p slot="title">
-              <Icon type="ios-paper"/>我的帖子
-            </p>
-            <a href="#" slot="extra" @click.prevent="morePost">
-              <Icon type="ios-loop-strong"></Icon>更多
-            </a>
-            <ul>
-              <li v-for="item in myPostList">
-                <Icon type="ios-paper"/>
-                <a :href="item.url" target="_blank">{{ item.name }}</a>
-              </li>
-            </ul>
-          </Card>
-        </Col>
-        <Col class="myReply" span="12">
-          <Card style>
-            <p slot="title">
-              <Icon type="ios-paper"/>我的回复
-            </p>
-            <a href="#" slot="extra" @click.prevent="morePost">
-              <Icon type="ios-loop-strong"></Icon>更多
-            </a>
-            <ul>
-              <li v-for="item in myPostList">
-                <Icon type="ios-paper"/>
-                <a :href="item.url" target="_blank">{{ item.name }}</a>
-              </li>
-            </ul>
-          </Card>
-        </Col>
-      </Row>
     </div>
   </div>
 </template>
-
-<style lang="less" scoped>
-.personalWrap {
-  margin: 0 auto;
-  width: 980px;
-  position: relative;
-  background: #fff;
-  padding-bottom: 50px;
-}
-.user_avatar {
-  padding: 20px;
-  .avatar_wrap {
-    height: 100px;
-    width: 100px;
-    border-radius: 50px;
-    margin: 0 auto;
-    overflow: hidden;
-    cursor: pointer;
-    img {
-      width: 100%;
-    }
-  }
-}
-.myPosts,
-.myReply {
-  a {
-    height: 25px;
-    line-height: 25px;
-    font-size: 15px;
-    color: #333;
-  }
-}
-</style>
 
 <script>
 import { getpersonalData } from "@/api/personal";
@@ -207,81 +133,8 @@ export default {
   data() {
     return {
       userInfoItem: null,
-      // {
-      //   name: "王总",
-      //   IDCard: "230125199408152853",
-      //   userPhone: "18686866648",
-      //   nickname: "王八蛋",
-      //   userMail: "123456@250.com",
-      //   bankCard: {
-      //     bankCard1: {
-      //       num: "1234567890098763",
-      //       name: "王晟宇",
-      //       addres: "内蒙古自治区科尔沁左翼后旗甘旗卡镇满斗村"
-      //     },
-      //     bankCard2: {
-      //       num: "1234567890098765",
-      //       name: "谢佳宇",
-      //       addres: "辽宁省宽甸满族自治县灌水镇灌水加油站"
-      //     }
-      //   },
-      //   addres: {
-      //     addres1: "湖南省长沙市火星区",
-      //     addres2: "河北省迁安市野鸡坨镇野鸡坨村"
-      //   }
-      // }
-      myPostList: [
-        {
-          name: "The Shawshank Redemption",
-          url: "https://movie.douban.com/subject/1292052/",
-          rate: 9.6
-        },
-        {
-          name: "Leon:The Professional",
-          url: "https://movie.douban.com/subject/1295644/",
-          rate: 9.4
-        },
-        {
-          name: "Farewell to My Concubine",
-          url: "https://movie.douban.com/subject/1291546/",
-          rate: 9.5
-        },
-        {
-          name: "Forrest Gump",
-          url: "https://movie.douban.com/subject/1292720/",
-          rate: 9.4
-        },
-        {
-          name: "Life Is Beautiful",
-          url: "https://movie.douban.com/subject/1292063/",
-          rate: 9.5
-        },
-        {
-          name: "Spirited Away",
-          url: "https://movie.douban.com/subject/1291561/",
-          rate: 9.2
-        },
-        {
-          name: "Schindler",
-          url: "https://movie.douban.com/subject/1295124/",
-          rate: 9.4
-        },
-        {
-          name: "The Legend of 1900",
-          url: "https://movie.douban.com/subject/1292001/",
-          rate: 9.2
-        },
-        {
-          name: "WALL·E",
-          url: "https://movie.douban.com/subject/2131459/",
-          rate: 9.3
-        },
-        {
-          name: "Inception",
-          url: "https://movie.douban.com/subject/3541415/",
-          rate: 9.2
-        }
-      ]
+      changeAvatar: false, // 是否移入头像
+      avatarSrc: require("../../assets/img/user-256.png") // 头像路径 暂时写死
     };
   },
   computed: {
@@ -296,37 +149,70 @@ export default {
   methods: {
     morePost() {
       console.log("more");
+    },
+    enterAvatar() {
+      // 鼠标移入头像
+      this.changeAvatar = true;
+    },
+    leaveAvatar() {
+      // 鼠标移出头像
+      this.changeAvatar = false;
+    },
+    choiceImg() {
+      // 更换头像
+      this.$refs.avatarFile.dispatchEvent(new MouseEvent("click"));
+    },
+    getFile() {
+      var _this = this;
+      let imgInfo;
+      const inputFile = this.$refs.avatarFile.files[0];
+      if (inputFile) {
+        if (
+          inputFile.type !== "image/jpeg" &&
+          inputFile.type !== "image/png" &&
+          inputFile.type !== "image/gif"
+        ) {
+          alert("不是有效的图片文件！");
+          return;
+        }
+        console.log(this.imgInfo);
+        imgInfo = Object.assign({}, this.imgInfo, {
+          name: inputFile.name,
+          size: inputFile.size,
+          lastModifiedDate: inputFile.lastModifiedDate.toLocaleString()
+        });
+        const reader = new FileReader();
+        reader.readAsDataURL(inputFile);
+        reader.onload = function(e) {
+          _this.avatarSrc = this.result;
+        };
+      } else {
+        return;
+      }
     }
   },
-  created() {
-    let _this = this
-    console.log(this.userInfo);
+  created() {},
+  mounted() {
+    let _this = this;
     if (!this.userInfo || !this.userInfo.isLogin) {
       this.$Message.error({
-        content: '当前登陆已过期,请先登陆',
+        content: "当前登陆已过期,请先登陆",
         duration: 4,
         closable: true,
-        onClose () {
-          console.log(_this.$router)
-          _this.$router.push({
-            name: 'forum_page'
-          })
+        onClose() {
+          // console.log(this)
         }
       });
+    } else {
+      getpersonalData(this.userInfo.user_id)
+        .then(res => {
+          this.userInfoItem = res.data;
+          console.log(res);
+        })
+        .catch(res => {
+          console.log(res);
+        });
     }
-  },
-  mounted() {
-    getpersonalData(this.userInfo.user_id)
-      .then(res => {
-        this.userInfoItem = res.data;
-        // this.$nextTick(() => {
-        //   $(".ivu-input").css({ border: "1px solid transparent" });
-        // });
-        console.log(res);
-      })
-      .catch(res => {
-        console.log(res);
-      });
   }
 };
 </script>

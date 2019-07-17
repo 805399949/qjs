@@ -7,31 +7,28 @@ import {
   objEqual
 } from '@/lib/tools'
 
+const ws = window.sessionStorage
+
 export const TOKEN_KEY = 'token'
 
-export const setToken = (token) => {
-  Cookies.set(TOKEN_KEY, token, {
-    expires: config.cookieExpires || 1
-  })
+export const getSessionItem = (key) => {
+  try {
+    return JSON.parse(ws.getItem(key));
+  } catch (err) {
+    return null;
+  }
 }
-
-export const setUserInfoCookie = (userInfo) => {
-  Cookies.set('userInfo', userInfo, {
-    expires: config.cookieExpires || 1
-  })
+export const setSessionItem = (key, val) => {
+  ws.setItem(key, JSON.stringify(val));
 }
-
-export const getToken = () => {
-  const token = Cookies.get(TOKEN_KEY)
-  if (token) return token
-  else return false
+export const clearSession = () => {
+  ws.clear();
 }
-
-export const getUserInfoCookie = () => {
-  const userInfo = Cookies.get('userInfo')
-  console.log(userInfo)
-  if (userInfo && userInfo !== 'false') return userInfo
-  else return 'false'
+export const sessionKeys = (index) => {
+  return ws.key(index);
+}
+export const removeSessionItem = (key) => {
+  ws.removeItem(key);
 }
 
 export const hasChild = (item) => {

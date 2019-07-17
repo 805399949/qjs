@@ -231,7 +231,7 @@
 
 <script>
 import ForumHeader from "@/components/forumHeader";
-import { setToken, getToken } from "@/lib/util";
+import { getSessionItem } from "@/lib/util";
 import {
   getRelativeTime,
   isMillisecond,
@@ -335,7 +335,7 @@ export default {
     this.handleSelected("forum_page");
     console.log(this.headerPath.secondPath.pKey);
     // 获取页面数据
-    getPostList(getToken(), {
+    getPostList(getSessionItem('token'), {
       type: this.headerPath.secondPath.secondPath,
       name: this.headerPath.thirdPath.thirdPath
     })

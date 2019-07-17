@@ -5,28 +5,33 @@ import {
 } from '@/api/user'
 
 import {
-  setToken,
-  getToken,
-  setUserInfoCookie,
-  getUserInfoCookie
+  getSessionItem,
+  setSessionItem,
+  removeSessionItem
 } from '@/lib/util'
 
+
 const state = {
-  userInfo: getUserInfoCookie(),
-  token: getToken(),
+  userInfo: getSessionItem('userInfo') || null,
+  token: getSessionItem('token') || null,
   // access: '',
   // hasGetInfo: false,
   // isLogin: false
 }
 
 const mutations = {
-  setUserInfo (state, userInfo) {
+  setUserInfo(state, userInfo) {   
+    setSessionItem('userInfo', userInfo)
     state.userInfo = userInfo
-    setUserInfoCookie(userInfo)
   },
   setToken(state, token) {
+    setSessionItem('token', token)
     state.token = token
-    setToken(token)
+  },
+  clearUserInfo(state) {
+    removeSessionItem('token')
+    removeSessionItem('userInfo')
+    state.userInfo = null
   }
 }
 
@@ -39,7 +44,8 @@ const actions = {
         userName,
         password
       }).then(res => {
-        const data = res.data
+        let data = res.data
+        commit('setUserInfo', data.userInfo)
         commit('setToken', data.token)
         resolve(res)
       }).catch(err => {
@@ -58,25 +64,9 @@ const actions = {
       //   reject(err)
       // })
       // 如果你的退出登录无需请求接口，则可以直接使用下面三行代码而无需使用logout调用接口
-      commit('setToken', '')
-      commit('setUserInfo', 'false')
+      commit('clearUserInfo')
+      
       resolve()
-    })
-  },
-  // 获取用户相关信息
-  getUserInfo({ state, commit }) {
-    return new Promise((resolve, reject) => {
-      try {
-        getUserInfo(state.token).then(res => {
-          const data = res.data
-          commit('setUserInfo', data)
-          resolve(data)
-        }).catch(err => {
-          reject(err)
-        })
-      } catch (error) {
-        reject(error)
-      }
     })
   }
 }

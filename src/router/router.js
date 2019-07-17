@@ -1,14 +1,7 @@
 import Home from '@/views/Home/Home.vue'
 // import Forum from '@/views/Forum/Forum.vue'
 
-export default [{
-    path: '/login',
-    name: 'login',
-    meta: {
-      title: 'Login - 登录',
-    },
-    component: () => import('@/views/Login/Login.vue')
-  },
+export default [
   {
     path: '/',
     name: '_home',

@@ -56,7 +56,8 @@ export default {
     myQjs () {
       // console.log(this.$store.state.user.userInfo)
       // 点击我的钱交所 
-      this.$store.state.user.userInfo !== 'false'
+      console.log(this.$store.state.user.userInfo)
+      this.$store.state.user.userInfo
       ? this.$router.push({
         name: 'personalCenter_page'
       })

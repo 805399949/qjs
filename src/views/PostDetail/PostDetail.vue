@@ -58,60 +58,6 @@
   </div>
 </template>
 
-<script>
-import ForumHeader from "@/components/forumHeader";
-import { mapActions } from "vuex";
-import ReplyTable from "@/components/replyList/replyList"
-
-export default {
-  name: "postDetail",
-  data() {
-    return {
-      
-    }
-  },
-  components: {
-    ForumHeader,
-    ReplyTable
-  },
-  computed: {
-    headerPath() {
-      // 当前页面层级
-      let headerPath = JSON.parse(window.localStorage.getItem("headerPath"));
-      if (this.$store.state.headerPath === 0 && headerPath) {
-        this.$store.commit("setHeaderPath", headerPath); //同步操作
-      }
-      return this.$store.state.headerPath;
-    }
-  },
-  methods: {
-    ...mapActions(["handleHeaderPath", "handleSelected"]),
-    postTitHandle(handleType) {
-      switch (handleType) {
-        case "del":
-          alert("垃圾帖")
-          break;
-        case "print":
-          alert("打印")
-          break;
-        case "previous":
-          alert("上个帖子")
-          break;
-        case "next":
-          alert("下个帖子")
-          break;
-      }
-    }
-  },
-  created() {
-    this.handleSelected("forum_page")
-  },
-  mounted() {
-    
-  }
-}
-</script>
-
 <style lang="less" scoped>
 
 .crumbs {
@@ -233,5 +179,59 @@ export default {
   }
 }
 </style>
+
+<script>
+import ForumHeader from "@/components/forumHeader";
+import { mapActions } from "vuex";
+import ReplyTable from "@/components/replyList/replyList"
+
+export default {
+  name: "postDetail",
+  data() {
+    return {
+      
+    }
+  },
+  components: {
+    ForumHeader,
+    ReplyTable
+  },
+  computed: {
+    headerPath() {
+      // 当前页面层级
+      let headerPath = JSON.parse(window.localStorage.getItem("headerPath"));
+      if (this.$store.state.headerPath === 0 && headerPath) {
+        this.$store.commit("setHeaderPath", headerPath); //同步操作
+      }
+      return this.$store.state.headerPath;
+    }
+  },
+  methods: {
+    ...mapActions(["handleHeaderPath", "handleSelected"]),
+    postTitHandle(handleType) {
+      switch (handleType) {
+        case "del":
+          alert("垃圾帖")
+          break;
+        case "print":
+          alert("打印")
+          break;
+        case "previous":
+          alert("上个帖子")
+          break;
+        case "next":
+          alert("下个帖子")
+          break;
+      }
+    }
+  },
+  created() {
+    this.handleSelected("forum_page")
+  },
+  mounted() {
+    
+  }
+}
+</script>
 
 

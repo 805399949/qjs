@@ -6,7 +6,7 @@ import searchRoutes from './search'
 import forumRoutes from './forum'
 import store from '@/store'
 import iView from 'iview'
-import { setToken, getToken, canTurnTo } from '@/lib/util'
+import { getSessionItem } from '@/lib/util'
 import config from '@/config'
 const { homeName } = config
 
@@ -25,7 +25,8 @@ const LOGIN_PAGE_NAME = 'login'
 
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start()
-  const token = getToken()
+  // const token = getToken()
+  const token = getSessionItem('token')
     
   if (!token && to.name !== LOGIN_PAGE_NAME) {
     // 未登录且要跳转的页面不是登录页

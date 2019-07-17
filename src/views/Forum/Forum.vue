@@ -117,7 +117,7 @@
 <script>
 import ForumHeader from '@/components/forumHeader'
 import { getForumTitInfo, getPostSubareaList } from "@/api/forum";
-import { setToken, getToken } from '@/lib/util'
+import { getSessionItem } from '@/lib/util'
 import { mapActions } from 'vuex'
 import { setTimeout } from 'timers';
 
@@ -160,12 +160,12 @@ export default {
     },
     // 请求渲染数据
     getPageRenderData () {
-      getForumTitInfo(getToken()).then(res => {
+      getForumTitInfo(getSessionItem('token')).then(res => {
         this.titInfo = res.data.titInfo      
       }).catch(err => {
         console.log(err)
       })
-      getPostSubareaList(getToken()).then(res => {
+      getPostSubareaList(getSessionItem('token')).then(res => {
         this.postSubareaList = res.data.subList
         this.$nextTick(() => {
 

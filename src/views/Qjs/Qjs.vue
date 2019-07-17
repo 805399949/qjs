@@ -81,7 +81,6 @@ export default {
                 minIndex = boxHeight.indexOf(minH);
             itemRef[i].style.cssText = `position:absolute;top:${minH}px;left:${minIndex * (itemRefWidth + 32)}px;`;
             boxHeight[minIndex] += itemRef[i].offsetHeight;
-            console.log(boxHeight);
           }
         }
         listRef.style.height = Math.max.apply(null, boxHeight) + 'px';

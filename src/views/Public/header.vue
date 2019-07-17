@@ -1,25 +1,29 @@
 <template>
   <div class="header-wrap">
     <div class="logo">
-        <slot name="logo"></slot>
+      <slot name="logo"></slot>
     </div>
     <div class="nav">
       <Nav></Nav>
     </div>
-    <div class="quick-menu" v-if="!userInfo.isLogin">
+    <div class="quick-menu" v-if="!userInfo">
       <div class="top-bar-box">
-        <Button @click="handleLogin" type="text" size="large">登录</Button>
+        <Button style="" @click="handleLogin" type="text" size="large">登录</Button>
         <Button @click="HandleRegister" shape="circle" size="large">注册</Button>
       </div>
     </div>
-    <User :userName="userInfo.name" :userAvator="userInfo.avator" style="float: right" v-else/>
+    <User @logOut="logOut" :userName="userInfo.name" :userAvator="userInfo.avator" style="float: right" v-else />
   </div>
 </template>
 
 <script>
-import Nav from "_c/nav/Nav"
-import User from "_c/User/User"
-import { type } from "os"
+import Nav from "_c/nav/Nav";
+import User from "_c/User/User";
+// import { type, userInfo } from "os";
+import { getSessionItem } from "@/lib/util";
+import { constants } from "crypto";
+import { mapActions } from 'vuex';
+import Emitter from '@/lib/mixins/emitter.js';
 
 export default {
   name: "Header",
@@ -27,34 +31,48 @@ export default {
     Nav,
     User
   },
+  mixins: [ Emitter ],
+  inject: ["reload"],
   data() {
     return {
-      //
+      isRouterAlive: true,
     };
   },
   computed: {
     userInfo() {
-      // Object.keys(this.$store.state.user.userInfo).length === 0
-      if (this.$store.state.user.userInfo === 'false') return {}
-      else {
-        return typeof this.$store.state.user.userInfo === "object"
-          ? this.$store.state.user.userInfo
-          : JSON.parse(this.$store.state.user.userInfo)
-      }
+      // if (!getSessionItem('userInfo')) {
+      //   this.reload()
+      // }
+      return getSessionItem("userInfo");
     }
   },
   methods: {
-    handleLogin () {
-      this.$router.push({
-          name: 'login'
-      })
+    ...mapActions([
+      'handleLogOut',
+      'handleSelected'
+    ]),
+    handleLogin() {
+      
+      this.dispatch('Home', 'login');
+      // this.$router.push({
+      //   name: "login"
+      // });
     },
-    HandleRegister () {
-      console.log('注册')
+    HandleRegister() {
+      console.log("注册");
+    },
+    logOut() {
+      this.handleLogOut().then(() => {
+        this.handleSelected("home");
+        this.$router.push({
+          name: 'home'
+        })
+        this.reload()
+      });
     }
   },
-  created () {
-     //
+  created() {
+    //
   },
   mounted() {
     //
@@ -89,6 +107,9 @@ export default {
       font-weight: bold;
       height: 60px;
       line-height: 60px;
+    }
+    .ivu-btn:focus {
+        box-shadow: none
     }
   }
 }
