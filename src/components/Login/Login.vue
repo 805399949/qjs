@@ -79,7 +79,7 @@
       </Col>
 
       <Col span="24" class="mt15">
-        <Button class="registNum" type="default" long>注册新账号</Button>
+        <Button @click="register" class="registNum" type="default" long>注册新账号</Button>
       </Col>
 
       <Col span="24" class="mt15" style="text-align: center; color: #777">
@@ -134,6 +134,12 @@ export default {
           });
         }
       });
+    },
+    register() {
+      this.$emit("on-register");
+      this.$router.push({
+        name: 'register'
+      })
     }
   },
   mounted() {

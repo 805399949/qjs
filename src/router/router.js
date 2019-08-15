@@ -14,6 +14,16 @@ export default [
     }]
   },
   {
+    path: '/register',
+    component: Home,
+    redirect: "/register/register_page",
+    children: [{
+      path: 'register_page',
+      name: 'register',
+      component: () => import('@/views/Register')
+    }]
+  },
+  {
     path: '/forum',
     name: 'forum',
     component: Home,

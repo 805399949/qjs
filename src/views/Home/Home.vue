@@ -16,7 +16,7 @@
       </a>
     </v-header>
     <Modal ref="loginModal" v-model="isLoginModalShow" title="登陆" width="600" :mask-closable="false">
-      <v-login @on-success-valid="login"></v-login>
+      <v-login @on-register="register" @on-success-valid="login"></v-login>
       <div slot="footer"></div>
     </Modal>
     <router-view class="routerView"></router-view>
@@ -59,7 +59,13 @@ export default {
       let _this = this;
       _this.isLoginModalShow = true;
     },
+    register() {
+       let _this = this
+        _this.isLoginModalShow = false
+        _this.$refs.header.reload() // 成功登陆后刷新
+    },
     login({ userName, password }) { // 触发登陆动作
+      // 先进行handleLogin(在sotre中), 如果成功 关闭登陆框 并刷新页面
       this.handleLogin({ userName, password }).then(res => {
         // console.log(this.$refs.loginModal.reomve());
         
@@ -76,6 +82,8 @@ export default {
   created() {
     let _this = this;
     _this.handleSelected("home");
+    
+    // 接受子组件header传递过来的自定义事件login 并触发loginModalShow方法
     _this.$on("login", this.loginModalShow);
   },
   watch: {}

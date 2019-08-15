@@ -52,14 +52,13 @@ export default {
       'handleSelected'
     ]),
     handleLogin() {
-      
+      // 向上级组件Home触发自定义事件login
       this.dispatch('Home', 'login');
-      // this.$router.push({
-      //   name: "login"
-      // });
     },
     HandleRegister() {
-      console.log("注册");
+      this.$router.push({
+        name: 'register'
+      })
     },
     logOut() {
       this.handleLogOut().then(() => {

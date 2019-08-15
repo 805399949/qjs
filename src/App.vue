@@ -34,15 +34,13 @@ export default {
 </script>
 
 <style lang="less">
-*{ word-wrap: break-word; }
+*{ word-wrap: break-word;   margin: 0; padding: 0; }
 .size{
   width: 100%;
   height: 100%;
 }
 html,body{
   .size;
-  margin: 0;
-  padding: 0;
 }
 #app {
   .size;
@@ -53,7 +51,7 @@ ul li {
 .wp,
 .wrap {
   margin: 0 auto;
-  width: 980px;
+  width: 1000px;
   position: relative;
 }
 .cl:before,
