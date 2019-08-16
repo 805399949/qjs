@@ -1,18 +1,7 @@
 <template>
   <div class="search-wrap">
     <div class="search-input-wrap clearfix">
-      <AutoComplete
-        icon="ios-search"
-        v-model="value3"
-        :data="data3"
-        :filter-method="filterMethod"
-        placeholder="搜索"
-        size="large"
-        style="width: 500px;
-        margin-right: 15px;"
-      >
-      </AutoComplete>
-      <Button type="primary" shape="circle">Search</Button>
+      <SearchInput></SearchInput>
     </div>
     <div class="hot-words">
       <div class="hot-words-title">热搜词</div>
@@ -24,24 +13,20 @@
 </template>
 
 <script>
-import Header from '@/views/Public/header.vue';
+import SearchInput from '@/components/Input/searchInput.vue';
 
 export default {
   name: 'SearchIndex',
   components: {
-    vHeader: Header,
+    SearchInput,
   },
   data () {
     return {
-      value3: '',
-      data3: ['xixi', 'haha', 'hoho'],
       hotWords: ['钱币', '科技', '邮票', '钱币', '美妆', '科技', '邮票', '美妆', '钱币'],
     };
   },
   methods: {
-    filterMethod (value, option) {
-      return option.toUpperCase().indexOf(value.toUpperCase()) !== -1;
-    },
+    
   },
 }
 </script>

@@ -17,6 +17,9 @@
       </Carousel>
     </div>
     <div class="news-wrap">
+      <div class="home-search-wrap clearfix">
+        <SearchInput></SearchInput>
+      </div>
       <div class="tit-wrap">
         <p class="tit">资讯</p>
         <span class="tit-line"></span>
@@ -39,6 +42,7 @@
 
 <script>
 import newsBox from "_c/news/boxNews";
+import SearchInput from '_c/Input/searchInput.vue';
 import {
   mapState,
 } from 'vuex';
@@ -49,6 +53,7 @@ export default {
   name: "qjs",
   components: {
     newsBox,
+    SearchInput,
   },
   data() {
     return {
@@ -120,6 +125,9 @@ export default {
     margin: 0 auto;
     margin-top: 10px;
     margin-bottom: 15px;
+    .home-search-wrap {
+      text-align: center;
+    }
     .tit-wrap {
       .tit {
         display: inline-block;
