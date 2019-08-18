@@ -7,8 +7,8 @@ Mock.mock(/news\/list\/waterfall/, {
   data: [
     {
       img: 'http://www.pptbz.com/pptpic/UploadFiles_6909/201203/2012031220134655.jpg',
-      title: '文章1',
-      describe: '简介1',
+      title: '中国经济指南：经济发展三阶段与全球产业链“雁阵模型”',
+      describe: '中国经济与社会发展，有助揭示经济...',
       author: '作者1',
       created: 1552432879333,
     },
@@ -27,7 +27,7 @@ Mock.mock(/news\/list\/waterfall/, {
       created: 1552432879333,
     },
     {
-      img: 'http://img17.3lian.com/d/file/201702/14/3d1d78481dbe5db4802f4b1eb548f365.jpg',
+      img: 'http://www.pptbz.com/pptpic/UploadFiles_6909/201203/2012031220134655.jpg',
       title: '文章4',
       describe: '简介4',
       author: '作者4',
@@ -62,7 +62,7 @@ Mock.mock(/news\/list\/waterfall/, {
       created: 1552432879333,
     },
     {
-      img: 'http://img5.imgtn.bdimg.com/it/u=3943723512,1898909937&fm=26&gp=0.jpg',
+      img: 'http://www.pptbz.com/pptpic/UploadFiles_6909/201203/2012031220134655.jpg',
       title: '文章9',
       describe: '简介3',
       author: '作者3',
