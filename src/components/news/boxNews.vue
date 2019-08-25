@@ -3,7 +3,7 @@
     <div class="pic">
       <img :src="imgUrl" alt="">
     </div>
-    <div class="news-info">
+    <div class="news-info" @click="toNewsDetail">
       <div class="title">
         {{ title }}
       </div>
@@ -45,6 +45,13 @@ export default {
   },
   filters: {
     dateFormat,
+  },
+  methods: {
+    toNewsDetail() {
+      this.$router.push({
+        path: '/news/news_detail',
+      });
+    },
   },
 }
 </script>

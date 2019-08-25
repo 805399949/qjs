@@ -34,7 +34,10 @@ export default {
       return option.toUpperCase().indexOf(value.toUpperCase()) !== -1;
     },
     handleSearch () {
-      console.log(this.value3);
+      console.log(this.value3, this.$router);
+      this.$router.push({
+        path: '/search/search_result',
+      });
     }
   },
 }
