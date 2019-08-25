@@ -12,7 +12,7 @@
   <div class="home-wrap">
     <v-header ref="header">
       <a slot="logo" href="javascript:;" @click="handleClickLogo">
-        <img src="@/assets/img/logo.png" alt />
+        <img src="@/assets/img/qjs-logo.png" alt />
       </a>
     </v-header>
     <Modal ref="loginModal" v-model="isLoginModalShow" title="登陆" width="600" :mask-closable="false">
