@@ -17,6 +17,12 @@
       </Carousel>
     </div>
     <div class="news-wrap">
+      <div class="home-search-wrap clearfix">
+        <SearchInput></SearchInput>
+      </div>
+      <div class="recommended-news clearfix">
+        <recommendedNews></recommendedNews>
+      </div>
       <div class="tit-wrap">
         <p class="tit">资讯</p>
         <span class="tit-line"></span>
@@ -39,6 +45,8 @@
 
 <script>
 import newsBox from "_c/news/boxNews";
+import SearchInput from '_c/Input/searchInput.vue';
+import recommendedNews from '_c/news/recommendedNews.vue';
 import {
   mapState,
 } from 'vuex';
@@ -49,6 +57,8 @@ export default {
   name: "qjs",
   components: {
     newsBox,
+    SearchInput,
+    recommendedNews,
   },
   data() {
     return {
@@ -61,42 +71,42 @@ export default {
     }),
   },
   methods: {
-    waterFall() {
-      let listRef = this.$refs.newsList, // 资讯列表整体包裹层
-          itemRef = this.$refs.newsItem, // 获取每一个资讯的div
-          len = itemRef.length, // 资讯个体的数量
-          itemRefWidth = itemRef[0].offsetWidth, // 资讯个体的 宽度
-          listRefWidth = 1160,
-          col = Math.floor(listRefWidth / itemRefWidth); // 展示列数 = 整体宽度 / 个体宽度
-      let img = itemRef[len - 1].getElementsByTagName('img')[0]; // 获取最后一个资讯里面的img
-      // 执行 img.onload 事件
-      img.onload = () => {
-        // 以下是瀑布流代码
-        let boxHeight = [];
-        for (let i = 0; i < len; i++) {
-          if (i < col) {
-            boxHeight.push(itemRef[i].offsetHeight);
-          } else {
-            let minH = Math.min.apply(null, boxHeight),
-                minIndex = boxHeight.indexOf(minH);
-            itemRef[i].style.cssText = `position:absolute;top:${minH}px;left:${minIndex * (itemRefWidth + 32)}px;`;
-            boxHeight[minIndex] += itemRef[i].offsetHeight;
-          }
-        }
-        listRef.style.height = Math.max.apply(null, boxHeight) + 'px';
-      }
-    },
+    // waterFall() {
+    //   let listRef = this.$refs.newsList, // 资讯列表整体包裹层
+    //       itemRef = this.$refs.newsItem, // 获取每一个资讯的div
+    //       len = itemRef.length, // 资讯个体的数量
+    //       itemRefWidth = itemRef[0].offsetWidth, // 资讯个体的 宽度
+    //       listRefWidth = 1160,
+    //       col = Math.floor(listRefWidth / itemRefWidth); // 展示列数 = 整体宽度 / 个体宽度
+    //   let img = itemRef[len - 1].getElementsByTagName('img')[0]; // 获取最后一个资讯里面的img
+    //   // 执行 img.onload 事件
+    //   img.onload = () => {
+    //     // 以下是瀑布流代码
+    //     let boxHeight = [];
+    //     for (let i = 0; i < len; i++) {
+    //       if (i < col) {
+    //         boxHeight.push(itemRef[i].offsetHeight);
+    //       } else {
+    //         let minH = Math.min.apply(null, boxHeight),
+    //             minIndex = boxHeight.indexOf(minH);
+    //         itemRef[i].style.cssText = `position:absolute;top:${minH}px;left:${minIndex * (itemRefWidth + 32)}px;`;
+    //         boxHeight[minIndex] += itemRef[i].offsetHeight;
+    //       }
+    //     }
+    //     listRef.style.height = Math.max.apply(null, boxHeight) + 'px';
+    //   }
+    // },
   },
   async beforeRouteEnter(to, from, next) {
     await store.dispatch('getWaterFallNewsList', {page: 0, number: 8});
     next();
   },
   created() {
-    this.$nextTick(() => {
-      setTimeout(() => {
-        this.waterFall();
-      }, 0) 
-    });
+    // this.$nextTick(() => {
+    //   setTimeout(() => {
+    //     this.waterFall();
+    //   }, 0) 
+    // });
   },
 };
 </script>
@@ -120,6 +130,12 @@ export default {
     margin: 0 auto;
     margin-top: 10px;
     margin-bottom: 15px;
+    .home-search-wrap {
+      text-align: center;
+    }
+    .recommended-news {
+
+    }
     .tit-wrap {
       .tit {
         display: inline-block;
@@ -145,7 +161,7 @@ export default {
       .news-item {
         float: left;
         margin-left: 32px;
-        padding-bottom: 20px;
+        padding-bottom: 35px;
         cursor: pointer;
       }
     }

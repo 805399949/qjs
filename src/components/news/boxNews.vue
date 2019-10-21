@@ -3,9 +3,9 @@
     <div class="pic">
       <img :src="imgUrl" alt="">
     </div>
-    <div class="news-info">
+    <div class="news-info" @click="toNewsDetail">
       <div class="title">
-        <a href="/" title=""><b>{{ title }}</b></a>
+        {{ title }}
       </div>
       <div class="describe">{{ describe }}</div>
     </div>
@@ -46,6 +46,13 @@ export default {
   filters: {
     dateFormat,
   },
+  methods: {
+    toNewsDetail() {
+      this.$router.push({
+        path: '/news/news_detail',
+      });
+    },
+  },
 }
 </script>
 
@@ -55,17 +62,22 @@ export default {
   background: #fff;
   -webkit-box-shadow: 0 0 4px rgba(0,0,0,.2);
   box-shadow: 0 0 4px rgba(0,0,0,.2);
+  &:hover {
+    .title {
+      font-weight: bold;
+    }
+  }
   .pic {
     width: 250px;
-    // height: 158px;
+    height: 250px;
     overflow: hidden;
     img {
       width: 250px;
-      // height: 158px;
+      height: 250px;
     }
   }
   .news-info {
-    height: 162px;
+    // height: 162px;
     padding: 15px;
     line-height: 20px;
     background-color: #fff;
@@ -76,12 +88,13 @@ export default {
       font-size: 14px;
       height: 42px;
       line-height: 18px;
+      color: #333333;
     }
     .desc {
       margin-top: 10px;
       margin-bottom: 5px;
       padding-bottom: 8px;
-      height: 80px;
+      // height: 80px;
       overflow: hidden
     }
   }
